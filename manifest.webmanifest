@@ -1,0 +1,14 @@
+{
+  "name": "Seneca Flight Planner",
+  "short_name": "Seneca Planner",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#061526",
+  "theme_color": "#071a2b",
+  "description": "Seneca flight planning tool for weight and balance, performance and paperwork workflows.",
+  "icons": [
+    {"src":"icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}

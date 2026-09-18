@@ -1,0 +1,1046 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#071a2b">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Seneca Polytechnic • Flight Planning Tool</title>
+<style>
+:root{--bg:#071523;--panel:#0b2133;--panel2:#102a40;--panel3:#15334c;--line:#315069;--text:#f4f8fc;--muted:#9eb0c2;--blue:#0b8cf4;--blue2:#59b7ff;--seneca-cyan:#43c6e8;--seneca-navy:#071a2b;--seneca-magenta:#d93c8d;--green:#67e35d;--greenbg:rgba(103,227,93,.10);--orange:#ffb21a;--orangebg:rgba(255,178,26,.10);--red:#ff5b5b;--redbg:rgba(255,91,91,.10);--purple:#c07cff;--shadow:0 18px 50px rgba(0,0,0,.24)}
+*{box-sizing:border-box}html{background:var(--bg)}body{margin:0;background:linear-gradient(180deg,#071a2b 0%,#061526 100%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;min-height:100vh}.app{max-width:1540px;margin:auto;padding:18px 20px 28px}.topbar{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:0 2px 16px;margin-bottom:10px}.brand{display:flex;gap:11px;align-items:center}.brand-mark{width:38px;height:38px;border-radius:10px;background:linear-gradient(145deg,var(--seneca-cyan),#0b78c8);display:grid;place-items:center;box-shadow:0 5px 18px rgba(67,198,232,.20);position:relative;overflow:hidden}.brand-mark:after{content:"";position:absolute;inset:-18px;background:linear-gradient(135deg,transparent 42%,rgba(255,255,255,.22) 43%,transparent 52%);transform:rotate(8deg)}.brand-mark span{position:relative;z-index:1;color:#052039;font-size:22px;font-weight:950;font-style:italic}.brand-name{font-size:20px;font-weight:850;letter-spacing:-.02em}.brand-sub{font-size:12px;color:var(--muted);margin-top:2px}.title{text-align:center;font-size:24px;font-weight:850;letter-spacing:-.02em}.title:after{content:"";display:block;width:42px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--seneca-cyan),var(--seneca-magenta));margin:7px auto 0}.top-actions{display:flex;align-items:center;gap:8px}.settings-icon{font-size:17px}.iconbtn{width:40px;height:40px;border:1px solid var(--line);border-radius:10px;background:var(--panel2);color:var(--text);font-size:18px}#wbModule[hidden],#perfModule[hidden],#paperworkModule[hidden]{display:none!important}.layout{display:grid;grid-template-columns:300px minmax(0,1fr) 470px;gap:12px;align-items:start}.panel{background:linear-gradient(180deg,rgba(16,43,66,.92),rgba(9,30,48,.92));border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}.panel-head{padding:12px 14px;border-bottom:1px solid var(--line);font-weight:800;font-size:18px}.panel-body{padding:14px}.section{padding:0 0 14px;margin-bottom:14px;border-bottom:1px solid var(--line)}.section:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}.section-title{font-size:16px;font-weight:800;margin-bottom:10px}.field{margin-bottom:10px}.field label{display:block;font-size:12px;color:#c2d0dd;margin-bottom:5px}.field input,.field select{width:100%;height:40px;border:1px solid #476078;border-radius:7px;background:#162e43;color:var(--text);padding:0 10px;font-size:14px;outline:none}.field input:focus,.field select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(22,137,255,.14)}.readonly{opacity:.9}.selected-aircraft{margin-top:10px;padding:13px;border:1px solid #35627f;border-radius:12px;background:linear-gradient(145deg,#12344d,#0b2439);box-shadow:inset 0 1px 0 rgba(255,255,255,.045),0 10px 28px rgba(0,0,0,.22),0 0 0 1px rgba(35,151,230,.06)}.selected-head{display:flex;align-items:center;gap:9px}.selected-check{width:27px;height:27px;display:grid;place-items:center;border-radius:50%;background:#35d85a;color:#062414;font-size:16px;font-weight:900;box-shadow:0 0 0 3px rgba(53,216,90,.10)}.selected-kicker{display:block;font-size:9px;letter-spacing:.09em;color:#8ca8bc;font-weight:800}.selected-head strong{display:block;font-size:23px;line-height:1.05;color:#f5f9fc}.selected-badge{margin-left:auto;border:1px solid #4c6d84;border-radius:999px;padding:4px 7px;font-size:9px;font-weight:800;color:#c9d8e4;background:#0d2a40;white-space:nowrap}.selected-type{margin:9px 0 11px 36px;color:#a9bfd0;font-size:12px;font-weight:650}.selected-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;border-top:1px solid rgba(80,115,139,.35);padding-top:10px}.selected-grid>div{background:rgba(4,18,31,.28);border:1px solid rgba(69,99,120,.32);border-radius:7px;padding:7px 8px}.selected-grid span{display:block;color:#7f98ab;font-size:8px;margin-bottom:3px}.selected-grid strong{display:block;color:#e4edf4;font-size:10px}.chart-point{cursor:pointer}.chart-wrap{position:relative}.chart-tools{position:absolute;right:10px;top:10px;display:flex;align-items:center;gap:4px;padding:4px;border:1px solid #35526a;border-radius:9px;background:rgba(6,21,38,.90);backdrop-filter:blur(6px);z-index:4}.chart-tools button{width:30px;height:28px;border:0;border-radius:6px;background:#15334b;color:#dceaf4;font-weight:850;font-size:14px;cursor:pointer}.chart-tools button:hover{background:#1d4865}.chart-tools button.active{background:#0b8cf4;color:#fff}.zoom-label{font-size:9px;color:#8fa5b7;padding:0 4px;min-width:31px;text-align:center}.status-section{margin-top:10px;border-top:1px solid var(--line);padding-top:9px}.status-title{font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:850;color:#b9c9d7;margin-bottom:7px}.status-grid{margin-top:0}.status{min-height:78px}.status .metric{font-weight:800;color:#eaf2f8}.status .margin{font-size:10px;color:#9fb2c2;margin-top:4px}.chart-tooltip{position:absolute;display:none;min-width:170px;max-width:220px;padding:9px 10px;border:1px solid #476078;border-radius:9px;background:rgba(7,26,42,.97);box-shadow:0 10px 28px rgba(0,0,0,.35);pointer-events:none;z-index:3}.chart-tooltip.show{display:block}.chart-tooltip strong{display:block;font-size:13px;color:#fff;margin-bottom:4px}.chart-tooltip span{display:block;font-size:10px;line-height:1.45;color:#c7d5e1}.chart-point{cursor:pointer}.badge{display:inline-flex;align-items:center;border:1px solid #3c5870;border-radius:999px;padding:3px 8px;font-size:10px;color:#c5d4e1}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}.person{background:#0d263c;border:1px solid #2b455c;border-radius:8px;padding:9px}.person .field{margin:0}.person input{background:#f7f9fb;color:#172230;border-color:#d8e0e7;text-align:right;font-weight:700}.person input:focus{border-color:var(--blue)}.input-max{display:block;margin-top:5px;font-size:10px;color:#8fa5b7;text-align:right;font-weight:650}.settings-overlay{position:fixed;inset:0;background:rgba(2,10,18,.72);backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;padding:18px;z-index:30}.settings-overlay.show{display:flex}.settings-modal{width:min(620px,100%);max-height:min(760px,calc(100vh - 36px));overflow:auto;background:linear-gradient(180deg,#102b43,#091e30);border:1px solid #3c6079;border-radius:14px;box-shadow:0 24px 70px rgba(0,0,0,.5)}.settings-head{display:flex;align-items:center;justify-content:space-between;padding:15px 17px;border-bottom:1px solid var(--line)}.settings-head h2{margin:0;font-size:18px}.settings-close{width:34px;height:34px;border:1px solid var(--line);border-radius:8px;background:#15334b;color:#dceaf4;font-size:18px}.settings-body{padding:16px}.settings-note{font-size:11px;line-height:1.5;color:#a9bdcc;background:#0c2539;border:1px solid #2d4c63;border-radius:9px;padding:10px;margin-bottom:14px}.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.settings-grid .field{margin:0}.settings-actions{display:flex;gap:8px;margin-top:14px}.settings-actions .btn{flex:1}.settings-danger{border-color:#8d5361;color:#ffb9c7}.settings-divider{border:0;border-top:1px solid var(--line);margin:16px 0}.settings-subtitle{font-size:12px;font-weight:800;color:#c8d7e3;margin-bottom:8px}.settings-add{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:8px}.settings-add .field{margin:0}.settings-list{margin-top:12px;border:1px solid #29485f;border-radius:9px;overflow:hidden}.settings-list-row{display:grid;grid-template-columns:1.1fr 1.2fr 1fr 1fr;gap:8px;padding:8px 10px;border-bottom:1px solid #203c51;font-size:10px;color:#b8c9d6}.settings-list-row:last-child{border-bottom:0}.settings-list-row strong{color:#eef5fa}.modal-error{font-size:10px;color:#ff7777;margin-top:8px;min-height:14px}@media(max-width:640px){.settings-grid,.settings-add{grid-template-columns:1fr}.settings-list-row{grid-template-columns:1fr 1fr}}.module-tabs{display:flex;gap:6px;margin:0 0 12px;padding:4px;border:1px solid var(--line);border-radius:11px;background:rgba(10,29,46,.75);width:max-content}.module-tab{border:0;border-radius:8px;background:transparent;color:#9eb0c2;padding:9px 14px;font-weight:800;font-size:12px;cursor:pointer}.module-tab.active{background:#153b58;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}.module-tab:hover{color:#fff}.performance-module{background:linear-gradient(180deg,rgba(16,43,66,.94),rgba(9,30,48,.94));border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:16px}.perf-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;border-bottom:1px solid var(--line);padding:2px 2px 15px;margin-bottom:14px}.perf-kicker{font-size:10px;letter-spacing:.1em;color:var(--seneca-cyan);font-weight:850}.perf-head h2{margin:3px 0 4px;font-size:23px}.perf-head p{margin:0;color:#9eb0c2;font-size:11px}.perf-weight-card{display:grid;grid-template-columns:1fr 1fr;gap:7px;min-width:250px;background:#0c2539;border:1px solid #31526c;border-radius:10px;padding:9px}.perf-weight-card>span{grid-column:1/-1;font-size:8px;color:#829aad;letter-spacing:.08em;font-weight:850}.perf-weight-card div{background:#102e46;border:1px solid #29485e;border-radius:7px;padding:7px}.perf-weight-card b{display:block;font-size:16px}.perf-weight-card small{color:#8fa5b7;font-size:9px}.perf-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.perf-card{background:#0b2236;border:1px solid #315069;border-radius:11px;padding:14px}.perf-card-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.perf-card-head>div{display:flex;align-items:center;gap:8px}.perf-card-head h3{margin:0;font-size:18px}.perf-number{font-size:10px;color:var(--seneca-cyan);font-weight:900;letter-spacing:.08em}.perf-badge{font-size:9px;color:#b8ccda;border:1px solid #35546a;border-radius:999px;padding:4px 7px}.perf-fields{display:grid;grid-template-columns:1fr 1fr;gap:9px}.perf-fields .field{margin:0}.perf-fields .field input,.perf-fields .field select{background:#f7f9fb;color:#172230;border-color:#d8e0e7}.perf-results{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px}.perf-result{background:#102e46;border:1px solid #2d5068;border-radius:8px;padding:9px}.perf-result span{display:block;color:#8fa5b7;font-size:9px;margin-bottom:3px}.perf-result b{font-size:17px}.perf-result small{display:block;color:#9eb2c2;font-size:9px;margin-top:2px}.perf-result.primary{grid-column:1/-1;background:linear-gradient(90deg,#123a5e,#0e2c48);border-color:#3b6b8b}.perf-result.primary b{font-size:24px}.perf-status{grid-column:1/-1;border-radius:8px;padding:9px;font-size:11px;font-weight:800}.perf-status.good{background:var(--greenbg);border:1px solid rgba(103,227,93,.35);color:#a9f3a2}.perf-status.bad{background:var(--redbg);border:1px solid rgba(255,91,91,.35);color:#ffb2b2}.perf-status.neutral{background:#102b42;border:1px solid #35546a;color:#bfd0dc}.perf-note{background:#0c2539;border:1px solid #2d4c63;border-radius:9px;padding:10px;color:#a9bdcc;font-size:10px;line-height:1.5}.perf-note.warning{border-color:#6e5630;color:#d8c29b}.perf-notes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-top:12px}.perf-chart-point{display:none}@media(max-width:900px){.perf-grid,.perf-notes{grid-template-columns:1fr}.perf-head{flex-direction:column}.perf-weight-card{width:100%;min-width:0}}@media(max-width:640px){.module-tabs{width:100%}.module-tab{flex:1;padding:9px 7px}.perf-fields,.perf-results{grid-template-columns:1fr}.perf-result.primary{grid-column:auto}}
+/* Performance input clarity: user-entered fields stay white; calculated/read-only fields are visually distinct. */
+.perf-fields .field input.readonly{background:#dfe5ea!important;color:#263746!important;border-color:#718396!important;box-shadow:inset 0 1px 3px rgba(20,40,55,.16)!important;font-weight:750;cursor:default}
+.perf-fields .field input.readonly:focus{border-color:#718396!important;box-shadow:inset 0 1px 3px rgba(20,40,55,.16)!important}
+.perf-fields .field.calculated-field label{color:#9aabba}
+
+
+.baron-nomogram-card{overflow:hidden;grid-column:1/-1;grid-row:1}.baron-nomo-intro{background:#0c2539;border:1px solid #2d4c63;border-radius:9px;padding:10px;color:#b8cad8;font-size:10px;line-height:1.5;margin-bottom:10px}.baron-nomo-intro b{color:#e8f3fb}.baron-nomo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.baron-nomo-tile{appearance:none;text-align:left;border:1px solid #2d4c63;border-radius:9px;background:#102e46;color:#dceaf4;padding:9px;min-height:76px;cursor:pointer}.baron-nomo-tile:hover{border-color:#4d7895;background:#123a56}.baron-nomo-tile.active{border-color:#22a8e0;box-shadow:0 0 0 1px rgba(34,168,224,.18) inset;background:#123a56}.baron-nomo-tile span{display:block;color:#56c9ed;font-size:8px;font-weight:900;letter-spacing:.08em}.baron-nomo-tile strong{display:block;font-size:10px;line-height:1.2;margin-top:4px}.baron-nomo-tile small{display:block;color:#90a8b9;font-size:8px;line-height:1.35;margin-top:4px}.baron-nomo-preview{margin-top:10px;border:1px solid #315069;border-radius:10px;background:#071a2b;padding:9px}.baron-nomo-preview-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:8px}.baron-nomo-preview-head span{display:block;color:#7893a7;font-size:8px;letter-spacing:.08em;font-weight:850}.baron-nomo-preview-head b{display:block;color:#eaf2f8;font-size:12px;margin-top:2px}.baron-nomo-open{border:1px solid #42677f;background:#12344d;color:#dff1fb;border-radius:7px;padding:7px 10px;font-size:9px;font-weight:800;cursor:pointer;white-space:nowrap}.baron-nomo-preview img{display:block;width:100%;max-height:520px;object-fit:contain;background:#fff;border-radius:7px}.baron-nomo-source{font-size:8px;color:#71899b;margin-top:7px}.baron-nomo-overlay{position:fixed;inset:0;z-index:80;background:rgba(1,8,15,.88);backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;padding:18px}.baron-nomo-overlay.show{display:flex}.baron-nomo-modal{width:min(1280px,100%);max-height:calc(100vh - 36px);overflow:auto;background:#0b2236;border:1px solid #3a6078;border-radius:13px;box-shadow:0 30px 100px rgba(0,0,0,.65)}.baron-nomo-modal-head{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid #29485f;background:#0c2539}.baron-nomo-modal-head span{font-size:8px;color:#56c9ed;letter-spacing:.09em;font-weight:900}.baron-nomo-modal-head h3{margin:2px 0 0;font-size:16px}.baron-nomo-close{width:34px;height:34px;border:1px solid #3a6078;border-radius:8px;background:#15344d;color:#e8f3fb;font-size:22px;cursor:pointer}.baron-nomo-modal-body{padding:14px}.baron-nomo-modal-body img{display:block;width:100%;max-height:calc(100vh - 160px);object-fit:contain;background:#fff;border-radius:7px}.baron-nomo-modal-body p{margin:8px 0 0;color:#9eb4c4;font-size:10px}@media(max-width:1100px){.baron-nomo-grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:760px){.baron-nomo-grid{grid-template-columns:1fr 1fr}.baron-nomo-preview img{max-height:420px}}@media(max-width:520px){.baron-nomo-grid{grid-template-columns:1fr}.baron-nomo-preview-head{align-items:flex-start;flex-direction:column}.baron-nomo-open{width:100%}}
+
+.helper{font-size:10px;line-height:1.45;color:var(--muted);margin-top:7px}.always{display:flex;gap:9px;align-items:flex-start;background:#0d2941;border:1px solid #31526c;border-radius:8px;padding:10px;color:#c4d5e5;font-size:11px;line-height:1.4}.always-icon{color:var(--blue2);font-size:16px}.testbtn,.btn{width:100%;min-height:42px;border:1px solid var(--blue);border-radius:8px;background:transparent;color:#cce8ff;font-weight:750;font-size:13px}.testbtn:hover,.btn:hover{background:rgba(22,137,255,.10)}.main-panel{min-width:0}.table-wrap{overflow-x:auto}.wb-table{width:100%;border-collapse:collapse;min-width:650px}.wb-table th{background:#0c2135;color:#dce8f2;font-size:11px;text-transform:uppercase;letter-spacing:.04em}.wb-table th,.wb-table td{border:1px solid #365066;padding:8px 8px}.wb-table th:not(:first-child),.wb-table td:not(:first-child){text-align:right}.wb-table td{font-size:12px}.wb-table .item{text-align:left!important;font-weight:650}.wb-table .subrow{background:#0e2942;font-weight:800}.wb-table .total{background:linear-gradient(90deg,#123a5e,#0e2c48);font-weight:850}.wb-table .total td{font-size:12px}.wb-table .fuel{background:#0d253a}.wb-table .negative{color:#ffbd88}.wb-table .mutedrow{color:#c0cfdb}.wb-table .cg{font-weight:850}.wb-table .condition td{border-top:2px solid #47718f;border-bottom:2px solid #294b64}.wb-table .condition .item{font-size:11px;letter-spacing:.01em}.wb-table .condition .cg{font-size:13px}.wb-table .condition-meta{display:block;margin-top:4px;font-size:9px;font-weight:650;color:#91a9ba}.wb-table .condition-meta.good{color:#70e86a}.wb-table .condition-meta.warn{color:#ffc13a}.wb-table .condition-meta.bad{color:#ff7777}.wb-table .condition-badge{display:inline-flex;align-items:center;gap:4px;margin-left:6px;padding:2px 5px;border-radius:999px;border:1px solid #36566d;font-size:8px;font-weight:800;letter-spacing:.04em;color:#b9cad8;vertical-align:middle}.wb-table .condition-badge.good{border-color:#3cd865;color:#70e86a;background:rgba(60,216,101,.08)}.wb-table .condition-badge.warn{border-color:#ffb21a;color:#ffc13a;background:rgba(255,178,26,.08)}.wb-table .condition-badge.bad{border-color:#ff5b5b;color:#ff7777;background:rgba(255,91,91,.08)}.wb-table .condition td{padding-top:10px;padding-bottom:10px}.wb-table .section-break td{border-top:3px solid #182f43}.wb-table .input-row td:first-child{padding-left:18px}.paper-note{border-top:1px solid #294157}.paper-note{font-size:10px;color:var(--muted);padding:9px 12px 12px}.limit-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}.limit-card{border:1px solid var(--line);border-radius:9px;background:#0c2135;overflow:hidden}.limit-card h3{margin:0;padding:9px 10px;border-bottom:1px solid var(--line);font-size:13px}.limit-list{list-style:none;margin:0;padding:7px 10px}.limit-list li{display:flex;justify-content:space-between;gap:8px;padding:5px 0;font-size:11px;color:#c7d5e1}.limit-list b{color:#f2f6fa}.envelope-panel .panel-body{padding:10px}.chart-wrap{border:1px solid var(--line);border-radius:9px;background:#071a2a;overflow:hidden}.chart{width:100%;height:auto;display:block}.chart-hint{font-size:10px;color:#8298aa;padding:5px 2px 0}.legend{display:flex;flex-wrap:wrap;gap:7px 13px;padding:9px 2px 4px;font-size:10px;color:#b8c7d5}.legend span{display:inline-flex;align-items:center;gap:5px}.dot{width:9px;height:9px;border-radius:50%;display:inline-block}.linekey{width:15px;height:3px;border-radius:2px;display:inline-block}.limit-columns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.category-card{border:1px solid;border-radius:8px;padding:10px;background:#0b2033}.category-card.normal{border-color:#3cd865}.category-card.utility{border-color:#ffb21a}.category-card h3{font-size:13px;margin:0 0 6px}.category-card p{font-size:10px;color:#c6d2de;line-height:1.45;margin:3px 0}.category-card.normal h3{color:#70e86a}.category-card.utility h3{color:#ffc13a}.status-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.status{border:1px solid;border-radius:8px;padding:10px}.status h3{margin:0 0 5px;font-size:13px}.status p{margin:0;font-size:10px;line-height:1.4;color:#c9d5df}.status.good{border-color:#44d55a;background:var(--greenbg)}.status.good h3{color:#75e96d}.status.warn{border-color:#ffb21a;background:var(--orangebg)}.status.warn h3{color:#ffc13a}.status.bad{border-color:#ff5b5b;background:var(--redbg)}.status.bad h3{color:#ff7777}.bottom-actions{display:flex;gap:10px;margin-top:12px}.bottom-actions .btn{flex:1}.bottom-actions .primary{background:var(--blue);color:#fff}.footer-note{text-align:center;color:#72889b;font-size:9px;margin-top:10px}.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#eaf5ff;color:#082039;padding:9px 14px;border-radius:999px;font-size:12px;font-weight:700;opacity:0;pointer-events:none;transition:.2s;z-index:20;box-shadow:0 8px 24px rgba(0,0,0,.3)}.toast.show{opacity:1}.hidden{display:none!important}
+@media(max-width:1200px){.layout{grid-template-columns:280px minmax(0,1fr)}.envelope-panel{grid-column:1/-1}.envelope-panel .panel-body{padding:12px}.chart-wrap{max-width:850px;margin:auto}}
+@media(max-width:760px){.app{padding:10px 9px 20px}.topbar{align-items:flex-start}.title{display:none}.brand-icon{font-size:29px}.brand-name{font-size:17px}.layout{grid-template-columns:1fr}.envelope-panel{grid-column:auto}.grid2,.limit-grid,.limit-columns,.status-grid{grid-template-columns:1fr}.wb-table{min-width:650px}.panel-head{font-size:17px}.bottom-actions{flex-direction:column}.bottom-actions .btn{width:100%}}
+@media(max-width:520px){.selected-grid{grid-template-columns:1fr}.selected-badge{font-size:8px}.selected-head strong{font-size:21px}}
+
+.paperwork-overlay{z-index:40}.paperwork-modal{width:min(920px,100%);max-height:calc(100vh - 28px);overflow:auto;background:#d9dde1;border:1px solid #58616a;border-radius:12px;box-shadow:0 24px 70px rgba(0,0,0,.6)}.paperwork-head-actions{display:flex;gap:8px;align-items:center}.paperwork-head-actions .btn{width:auto;min-height:34px;padding:0 12px}.paperwork-body{padding:18px}.paperwork-banner{margin-bottom:12px;padding:9px 11px;border-radius:8px;background:#102b43;border:1px solid #315069;color:#cbd9e4;font-size:11px}.paperwork-banner.complete{border-color:#3cd865;color:#aaf3a5}.paper-sheet{width:100%;background:#fff;color:#111;box-shadow:0 8px 22px rgba(0,0,0,.18);padding:22px 24px;margin:0 auto 18px;font-family:Arial,Helvetica,sans-serif}.paper-title{font-size:18px;font-weight:800;margin-bottom:3px}.paper-subtitle{font-size:15px;font-weight:800;margin-bottom:12px}.paper-rule{border-top:3px solid #111;margin:7px 0 0}.paper-section{background:#eee;border-top:2px solid #111;border-bottom:2px solid #111;text-align:center;font-weight:800;font-style:italic;padding:7px;font-size:14px;margin:0 0 12px}.paper-meta{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;font-size:11px;font-weight:700;margin:0 4px 10px}.paper-table{width:82%;border-collapse:collapse;font-size:11px}.paper-table th,.paper-table td{border:1px solid #111;padding:6px 5px}.paper-table th{text-align:center;font-weight:800}.paper-table td:not(:first-child){text-align:right}.paper-table .paper-total{font-weight:800}.paper-table .paper-sep td{border-top:5px solid #333;padding:2px}.paper-cg{position:absolute;right:24px;border:1px solid #111;width:78px;text-align:center;padding:7px 3px;font-size:11px}.paper-cg b{display:block;font-size:10px;margin-bottom:4px}.paper-cg span{font-size:10px}.paper-wb-wrap{position:relative}.paper-limits{margin-top:14px;font-size:11px}.paper-limits h4{margin:0 0 7px;text-decoration:underline}.paper-limits div{margin:5px 0}.paper-note-small{font-size:9px;font-style:italic;margin-top:9px}.perf-paper-grid{display:grid;grid-template-columns:1fr 1fr 1fr;column-gap:28px;row-gap:9px;font-size:11px}.perf-field{display:grid;grid-template-columns:auto 1fr;gap:7px;align-items:end;min-height:21px}.perf-field .v{border-bottom:1px solid #111;min-height:18px;font-weight:700;text-align:center}.perf-center{text-align:center}.perf-italic{font-style:italic;font-weight:800}.perf-distance{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:14px}.perf-distance .block{display:grid;gap:7px}.perf-vref{text-align:center;margin-top:8px}.perf-formula{font-size:10px;margin-top:34px}.perf-footer{text-align:right;margin-top:20px;font-size:9px}.paper-sheet.incomplete{opacity:.72}@media(max-width:700px){.paperwork-body{padding:8px}.paper-sheet{padding:14px}.paper-meta{grid-template-columns:1fr}.paper-table{width:100%}.paper-cg{position:static;margin:8px 0}.perf-paper-grid{grid-template-columns:1fr 1fr}.perf-distance{grid-template-columns:1fr}}
+@media print{body>*{display:none!important}.paperwork-overlay{display:block!important;position:static!important;background:#fff!important}.paperwork-modal{display:block!important;max-height:none!important;box-shadow:none!important;border:0!important;background:#fff!important;width:100%!important}.paperwork-head-actions{display:none!important}.paperwork-body{padding:0!important}.paper-sheet{box-shadow:none!important;margin:0 0 18px!important;page-break-after:always}.paper-sheet:last-child{page-break-after:auto}.paperwork-banner{display:none!important}}
+
+.paperwork-module{background:linear-gradient(180deg,rgba(16,43,66,.94),rgba(9,30,48,.94));border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:16px}.paperwork-page-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;border-bottom:1px solid var(--line);padding:2px 2px 15px;margin-bottom:14px}.paperwork-page-head h2{margin:3px 0 4px;font-size:23px}.paperwork-page-head p{margin:0;color:#9eb0c2;font-size:11px}.paperwork-actions{display:flex;gap:8px}.paperwork-actions .btn{width:auto;padding:0 14px}.paperwork-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}.paperwork-card{background:#0b2236;border:1px solid #315069;border-radius:11px;overflow:hidden}.wb-paper-card{border-top:2px solid #ff5363}.perf-paper-card{border-top:2px solid #3ea7ff}.paperwork-card-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 14px;border-bottom:1px solid #29465d}.paperwork-card-head>div{display:flex;align-items:center;gap:10px}.paper-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:8px;background:#102f47;border:1px solid #3b6079;font-size:17px}.paperwork-card-head h3{margin:0;font-size:15px}.paperwork-card-head p{margin:3px 0 0;color:#91a8ba;font-size:10px}.form-badge{font-size:9px;color:#b7c9d7;border:1px solid #35536a;border-radius:999px;padding:4px 7px;white-space:nowrap}.paper-preview{background:#d9dde1;padding:12px;max-height:760px;overflow:auto}.paper-preview .paper-sheet{margin:0 auto;background:#fff;transform:none}.paper-preview .paper-title{font-size:14px}.paper-preview .paper-subtitle{font-size:12px}.paper-preview .paper-section{font-size:11px;padding:5px}.paper-preview .paper-table{font-size:9px}.paper-preview .paper-table th,.paper-preview .paper-table td{padding:4px}.paper-preview .paper-meta{font-size:8px}.paper-preview .paper-note-small,.paper-preview .paper-limits{font-size:8px}.paper-preview .perf-paper-grid{font-size:8px;gap:5px 18px}.paper-preview .perf-field{min-height:16px}.paper-preview .perf-distance{gap:18px;margin-top:9px}.paper-preview .perf-formula{font-size:7px;margin-top:20px}.paper-wb-wrap{display:grid;grid-template-columns:minmax(0,1fr) 78px;gap:10px;align-items:start}.paper-cg-stack{display:flex;flex-direction:column;gap:30px;padding-top:34px}.paper-cg{position:static;width:78px;height:66px;display:grid;place-items:center;border:1px solid #111;padding:6px 3px;font-size:10px}.paper-cg b{font-size:10px}.paper-cg span{font-size:10px}.paper-table{width:100%}@media(max-width:900px){.paperwork-cards{grid-template-columns:1fr}}@media(max-width:640px){.paperwork-page-head{flex-direction:column}.paperwork-actions{width:100%}.paperwork-actions .btn{flex:1}.paper-preview{padding:6px}.paper-wb-wrap{grid-template-columns:1fr 68px}.paper-cg{width:68px}}
+/* Paperwork readability — force the simulated Seneca forms to remain high-contrast */
+.paper-preview{background:#bfc6cc!important;border:1px solid #68737d!important;border-radius:8px}
+.paper-sheet,.paper-sheet *{color:#111!important;text-shadow:none!important;opacity:1!important}
+.paper-sheet{background:#fff!important;border:1px solid #111!important;forced-color-adjust:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.paper-sheet input,.paper-sheet select,.paper-sheet textarea{background:#fff!important;color:#111!important;border-color:#111!important}
+.paper-title,.paper-subtitle,.paper-section,.paper-meta,.paper-table,.paper-limits,.paper-note-small,.perf-paper-grid,.perf-distance,.perf-vref,.perf-formula,.perf-footer{color:#111!important}
+.paper-section{background:#eee!important;border-color:#111!important}
+.paper-table,.paper-table th,.paper-table td{color:#111!important;background:#fff!important;border-color:#111!important}
+.paper-table .paper-sep td{background:#fff!important;border-top-color:#333!important}
+.paper-cg,.paper-cg b,.paper-cg span{color:#111!important}
+.paper-cg{background:#fff!important;border:2px solid #111!important}
+.paper-limits h4{color:#111!important}
+.perf-field,.perf-field *{color:#111!important}
+.perf-field .v{background:#fff!important;color:#111!important;border-bottom:2px solid #111!important}
+.perf-formula,.perf-center,.perf-italic{color:#111!important}
+.paper-footer,.perf-footer{color:#111!important}
+.paper-sheet.incomplete{opacity:1!important}
+@media print{.paper-preview{background:#fff!important;border:0!important}.paper-sheet{border:0!important}}
+.paper-table .paper-total td{background:#fff}
+.paper-section{background:#eee!important}
+.perf-field .v{color:#111!important}
+.paperwork-card-head h3{color:#f3f7fa!important}
+.paperwork-card-head p{color:#a9bdcc!important}
+.form-badge{color:#d7e4ed!important}
+.paperwork-banner{color:#d9e5ed!important}
+.paperwork-banner.complete{color:#aaf3a5!important}
+
+@media print{body{background:#fff!important}.topbar,.module-tabs,#wbModule,#perfModule,.bottom-actions,.footer-note,.settings-overlay{display:none!important}.paperwork-module{display:block!important;background:#fff!important;color:#111!important;box-shadow:none!important;border:0!important;padding:0!important}.paperwork-page-head,.paperwork-banner,.paperwork-card-head{display:none!important}.paperwork-cards{display:block!important}.paperwork-card{border:0!important;box-shadow:none!important;background:#fff!important}.paper-preview{padding:0!important;background:#fff!important;max-height:none!important;overflow:visible!important}.paper-sheet{box-shadow:none!important;margin:0!important;page-break-after:always!important}.paper-sheet:last-child{page-break-after:auto!important}}
+
+/* v1.8 — exact Seneca W&B worksheet layout + horizontal mobile form scrolling */
+.paper-preview{overflow-x:auto!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+.paper-preview .paper-sheet,.paper-preview .perf-exact-form,.paper-preview .wb-exact-form{width:746px!important;min-width:746px!important;max-width:none!important;margin-left:auto!important;margin-right:auto!important;}
+.wb-exact-form{height:986px;background:#fff;color:#111;font-family:Arial,Helvetica,sans-serif;position:relative;padding:16px 16px 22px;box-sizing:border-box;}
+.wb-exact-form *{box-sizing:border-box;color:#111!important;}
+.wb-exact-title{font-size:17px;font-weight:800;line-height:1.2;margin-bottom:7px;}
+.wb-exact-subtitle{font-size:15px;font-weight:800;line-height:1.2;margin-bottom:11px;}
+.wb-exact-meta{height:30px;display:grid;grid-template-columns:1.25fr .75fr 1fr;align-items:end;font-size:13px;font-weight:800;padding:0 4px 4px;border-bottom:3px solid #111;}
+.wb-exact-meta b{font-weight:700;}
+.wb-exact-body{position:relative;height:670px;margin-top:0;}
+.wb-exact-table{position:absolute;left:0;top:0;width:580px;border-collapse:collapse;font-size:13px;}
+.wb-exact-table th,.wb-exact-table td{border:1px solid #111;padding:8px 5px;height:35px;line-height:1.18;}
+.wb-exact-table th{height:31px;text-align:center;font-weight:800;font-size:13px;}
+.wb-exact-table th:nth-child(1){width:300px}.wb-exact-table th:nth-child(2){width:170px}.wb-exact-table th:nth-child(3){width:170px}
+.wb-exact-table td:not(:first-child){text-align:right;}
+.wb-exact-table .wb-subtotal td{height:57px;font-weight:700;}
+.wb-exact-table .wb-tall td{height:72px;vertical-align:middle;}
+.wb-exact-table .wb-landing td{height:48px;font-weight:700;}
+.wb-exact-table .wb-separator td{height:9px;padding:0;background:#222;border-color:#111;}
+.wb-cg-label{position:absolute;left:579px;width:77px;text-align:center;font-size:13px;font-weight:800;}
+.wb-cg-label>div{height:66px;border:1px solid #111;margin-top:3px;display:grid;place-items:center;font-weight:400;font-size:13px;background:#fff;}
+.wb-cg-label.cg1{top:252px}.wb-cg-label.cg2{top:458px}.wb-cg-label.cg3{top:607px}
+.wb-exact-note{font-size:11px;font-style:italic;margin-top:7px;padding-left:4px;}
+.wb-exact-limits{margin-top:26px;padding-left:4px;font-size:12px;}
+.wb-limit-title{font-size:14px;font-weight:700;text-decoration:underline;margin-bottom:16px;}
+.wb-exact-limits div:not(.wb-limit-title){margin:0 0 15px;display:flex;gap:44px;}
+.wb-exact-footer{position:absolute;right:17px;bottom:10px;font-size:9px;}
+@media(max-width:900px){.paper-preview .paper-sheet,.paper-preview .perf-exact-form,.paper-preview .wb-exact-form{margin-left:0!important;margin-right:0!important;}}
+@media print{.paper-preview .paper-sheet,.paper-preview .perf-exact-form,.paper-preview .wb-exact-form{width:746px!important;min-width:746px!important;max-width:none!important;margin-left:0!important;margin-right:0!important;}.paper-preview{overflow:visible!important;}}
+
+/* v1.8 — Seneca Performance Form layout based directly on supplied Form #301 reference */
+.perf-exact-form{width:100%;max-width:746px;margin:0 auto;background:#fff;color:#111;font-family:Arial,Helvetica,sans-serif;position:relative;padding:20px 18px 24px;box-shadow:none;overflow:hidden}
+.perf-exact-form *{box-sizing:border-box;color:#111!important}
+.perf-exact-title{font-size:18px;font-weight:800;line-height:1.25;margin:0 0 3px}
+.perf-exact-subtitle{font-size:16px;font-weight:800;line-height:1.25;margin:0 0 14px}
+.perf-exact-rule{height:3px;background:#111;margin:0 0 3px}
+.perf-exact-band{height:38px;background:#eee;border-top:2px solid #111;border-bottom:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;font-style:italic;margin:0 0 18px}
+.perf-exact-section{position:relative;margin:0 0 22px}
+.perf-exact-field{position:absolute;height:25px;display:flex;align-items:flex-end;white-space:nowrap;font-size:16px;line-height:1}
+.perf-exact-field .label{font-weight:400;margin-right:7px}
+.perf-exact-field .value{display:inline-flex;align-items:flex-end;justify-content:center;border-bottom:2px solid #111;min-width:112px;height:23px;font-weight:400;padding:0 3px 2px;font-size:15px}
+.perf-exact-field.bold .label{font-weight:800}
+.perf-exact-field.bold .value{font-weight:700}
+.perf-exact-field.centered{justify-content:center}
+.perf-exact-heading{position:absolute;font-size:16px;font-weight:800;font-style:italic;white-space:nowrap}
+.perf-exact-heading.bold{font-style:normal}
+.perf-exact-section.departure{height:493px}
+.perf-exact-section.destination{height:612px;border-top:3px solid #111;padding-top:0}
+.perf-exact-section.destination .perf-exact-band{margin-top:0;margin-bottom:18px}
+.perf-exact-departure-grid{position:relative;height:455px}
+.perf-exact-destination-grid{position:relative;height:520px}
+.perf-exact-section .f-tw{left:0;top:0}.perf-exact-section .f-elev{left:0;top:63px}.perf-exact-section .f-runway{left:245px;top:63px}.perf-exact-section .f-wind{left:485px;top:63px}
+.perf-exact-section .f-alt{left:0;top:107px}.perf-exact-section .f-tora{left:288px;top:107px}.perf-exact-section .f-hwc{left:531px;top:107px}
+.perf-exact-section .f-pa{left:0;top:151px}.perf-exact-section .f-toda{left:288px;top:151px}.perf-exact-section .f-xwc{left:531px;top:151px}
+.perf-exact-section .f-temp{left:0;top:195px}.perf-exact-section .f-short{left:386px;top:195px;transform:translateX(-50%);font-style:normal}
+.perf-exact-section .f-da{left:0;top:239px}.perf-exact-section .f-liftoff{left:288px;top:239px}.perf-exact-section .f-speed50{left:507px;top:239px}
+.perf-exact-section .f-todhead{left:50%;top:286px;transform:translateX(-50%)}
+.perf-exact-section .f-groundrun{left:0;top:331px}.perf-exact-section .f-todist{left:315px;top:331px}
+.perf-exact-section .f-immediate{left:50%;top:377px;transform:translateX(-50%)}
+.perf-exact-section .f-groundroll{left:0;top:422px}.perf-exact-section .f-landdist{left:315px;top:422px}.perf-exact-section .f-imvref{left:325px;top:467px}
+.perf-exact-section .f-lw{left:0;top:0}.perf-exact-section.destination .f-elev{left:0;top:89px}.perf-exact-section.destination .f-runway{left:245px;top:89px}.perf-exact-section.destination .f-wind{left:485px;top:89px}
+.perf-exact-section.destination .f-alt{left:0;top:133px}.perf-exact-section.destination .f-lda{left:288px;top:133px}.perf-exact-section.destination .f-hwc{left:531px;top:133px}
+.perf-exact-section.destination .f-pa{left:0;top:177px}.perf-exact-section.destination .f-xwc{left:531px;top:177px}
+.perf-exact-section.destination .f-temp{left:0;top:221px}.perf-exact-section.destination .f-da{left:0;top:265px}
+.perf-exact-section.destination .f-ldhead{left:50%;top:314px;transform:translateX(-50%)}
+.perf-exact-section.destination .f-groundroll{left:0;top:358px}.perf-exact-section.destination .f-landdist{left:315px;top:358px}.perf-exact-section.destination .f-vref{left:325px;top:403px}
+.perf-exact-formula{position:absolute;left:0;right:0;top:456px;text-align:center;font-size:13px;font-style:italic;line-height:1.35}
+.perf-exact-formula sub{font-size:.75em}.perf-exact-formula sup{font-size:.75em}
+.perf-exact-fuel{position:absolute;left:0;top:504px;font-size:15px;font-weight:700;font-style:italic}.perf-exact-fuel .value{display:inline-flex;min-width:120px;border-bottom:2px solid #111;height:23px;vertical-align:bottom;justify-content:center;font-weight:400;font-style:normal;margin-left:7px}
+.perf-exact-footer{position:absolute;right:18px;bottom:4px;font-size:9px}
+.perf-exact-section .unit{font-size:12px;margin-left:2px}
+@media(max-width:760px){.perf-exact-form{min-width:746px}.paper-preview{overflow-x:auto}}
+
+.baron-arm-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.baron-arm-grid .person{padding:8px}.baron-arm-grid .field{margin:0}.baron-arm-grid input{background:#f7f9fb;color:#172230;border-color:#d8e0e7;text-align:right;font-weight:700}.baron-arm-grid .input-max{font-size:9px}.baron-arm-note{font-size:9px;color:#8fa5b7;margin-top:6px;line-height:1.4}.baron-fixed-arms{display:none}.baron-fixed-arms span{display:flex;justify-content:space-between;align-items:center;background:#0d263c;border:1px solid #2b455c;border-radius:8px;padding:9px;color:#a9bdcc;font-size:11px}.baron-fixed-arms b{color:#f1f6fa;font-size:13px}
+@media(max-width:640px){.baron-fixed-arms{grid-template-columns:1fr}}
+.baron-paper{font-family:Arial,Helvetica,sans-serif;background:#fff;color:#111;border:2px solid #111;padding:22px 22px 18px;max-width:900px;margin:auto;box-shadow:0 5px 18px rgba(0,0,0,.18)}.baron-paper *{box-sizing:border-box;color:#111!important}.baron-paper .bp-school{font-size:14px;font-weight:800}.baron-paper .bp-title{font-size:16px;font-weight:800;margin-top:3px}.baron-paper .bp-rule{border-top:2px solid #111;margin:8px 0}.baron-paper .bp-meta{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;font-size:11px;font-weight:700;margin-bottom:8px}.baron-paper .bp-table-wrap{position:relative}.baron-paper table{width:calc(100% - 100px);border-collapse:collapse;font-size:11px}.baron-paper th,.baron-paper td{border:1px solid #111;padding:5px 6px}.baron-paper th{text-align:center;font-weight:800}.baron-paper td:not(:first-child){text-align:right}.baron-paper td:first-child{text-align:left}.baron-paper .bp-total td{font-weight:800}.baron-paper .bp-total i{font-weight:700}.baron-paper .bp-heavy td{border-top:3px solid #111}.baron-paper .bp-cg{position:absolute;right:0;width:82px;border:1px solid #111;text-align:center;padding:6px 3px;font-size:10px;background:#fff}.baron-paper .bp-cg b{display:block;font-size:10px;margin-bottom:3px}.baron-paper .bp-cg span{font-size:11px;font-weight:800}.baron-paper .bp-cg small{display:block;font-size:7px;margin-top:3px}.baron-paper .bp-cg1{top:42px}.baron-paper .bp-cg2{top:205px}.baron-paper .bp-cg3{top:328px}.baron-paper .bp-note{font-size:9px;font-style:italic;margin-top:8px}.baron-paper .bp-limits{margin-top:12px;font-size:10px}.baron-paper .bp-limits h4{margin:0 0 5px;text-decoration:underline}.baron-paper .bp-limits div{margin:3px 0}.baron-paper .bp-footer{margin-top:25px;font-size:9px}
+
+
+.baron-lookup-status{margin-top:10px;padding:10px 12px;border:1px solid #315069;border-radius:9px;background:#0b2336;display:flex;flex-direction:column;gap:3px;font-size:10px;line-height:1.35}.baron-lookup-status b{color:#dcecf6}.baron-lookup-status span{color:#91aabd}.baron-lookup-status.validated{border-color:#2d8c65;background:#0c2d27}.baron-lookup-status.validated b{color:#8ff0bd}.baron-lookup-status.required{border-color:#8b6a38;background:#2a2113}.baron-lookup-status.required b{color:#ffd58a}.baron-lookup-status.estimated{border-color:#376c8e;background:#102d42}.baron-lookup-status.estimated b{color:#9ed9ff}}.baron-perf-note{font-size:10px;line-height:1.5;color:#a9bdcc;background:#0c2539;border:1px solid #2d4c63;border-radius:9px;padding:10px;margin-top:12px}.baron-perf-entry{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.baron-perf-entry .field{margin:0}.baron-perf-entry input{height:36px}.baron-example{margin-top:9px;padding:8px;border:1px dashed #46667d;border-radius:8px;font-size:10px;color:#a9bdcc}.baron-example b{color:#e8f3fb}.baron-paper{background:#fff;color:#111;padding:24px 26px;font-family:Arial,Helvetica,sans-serif;font-size:10px}.bp-school{font-size:16px;font-weight:800}.bp-title{text-align:left;font-size:15px;font-weight:800;margin-top:2px}.bp-rule{border-top:3px solid #111;margin:10px 0}.bp-section{background:#eee;border-top:2px solid #111;border-bottom:2px solid #111;text-align:center;font-style:italic;font-weight:800;padding:6px;font-size:12px;margin:0}.bp-grid{display:grid;grid-template-columns:1fr 1fr 1fr;column-gap:20px;row-gap:0;padding:10px 4px}.bp-col{display:grid;gap:7px}.bp-field{display:grid;grid-template-columns:auto 1fr;gap:7px;align-items:end;min-height:20px}.bp-field .v{border-bottom:1px solid #111;min-height:17px;text-align:center;font-weight:700}.bp-subhead{font-style:italic;font-weight:800;margin:7px 0 3px}.bp-distance{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:5px 0}.bp-distance .bp-field{min-height:22px}.bp-flight{border-top:3px solid #111;margin-top:8px}.bp-dest{border-top:3px solid #111;margin-top:14px}.bp-footer{margin-top:18px;font-size:9px;text-decoration:underline}.bp-paper-note{font-size:8px;font-style:italic;margin-top:8px}.bp-complete{font-size:8px;margin-top:7px}
+@media(max-width:900px){.baron-perf-entry{grid-template-columns:1fr 1fr}.bp-grid{grid-template-columns:1fr 1fr}}@media(max-width:640px){.baron-perf-entry{grid-template-columns:1fr}.bp-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main class="app">
+<header class="topbar">
+  <div class="brand"><div class="brand-mark" aria-hidden="true"><span>S</span></div><div><div class="brand-name">Seneca Polytechnic</div><div class="brand-sub">School of Aviation • Flight Planning Tool</div></div></div>
+  <div class="title" id="title">C172S – Weight &amp; Balance</div>
+  <div class="top-actions"><button class="iconbtn" id="themeBtn" aria-label="Toggle appearance" title="Appearance">☾</button><button class="iconbtn settings-icon" id="settingsBtn" aria-label="Aircraft W&B settings" title="Aircraft W&B settings">⚙</button><button class="iconbtn" id="resetBtn" aria-label="Reset flight" title="Reset flight">↺</button></div>
+</header>
+
+<div class="module-tabs" role="tablist" aria-label="Flight planning modules">
+  <button type="button" class="module-tab active" id="wbTab" role="tab" aria-selected="true">Weight &amp; Balance</button>
+  <button type="button" class="module-tab" id="perfTab" role="tab" aria-selected="false">Takeoff &amp; Landing Performance</button>
+  <button type="button" class="module-tab" id="paperTab" role="tab" aria-selected="false">▤ Paperwork</button>
+</div>
+
+<div class="layout" id="wbModule">
+  <aside class="panel">
+    <div class="panel-head">Aircraft</div>
+    <div class="panel-body">
+      <section class="section">
+        <div class="grid2"><div class="field"><label for="flightDate">Date</label><input id="flightDate" type="date"></div><div class="field"><label for="picName">PIC</label><input id="picName" type="text" placeholder="PIC name"></div></div>
+        <div class="field"><label for="aircraft">Aircraft Registration</label><select id="aircraft"></select></div>
+        <div class="selected-aircraft" aria-live="polite">
+          <div class="selected-head"><div class="selected-check">✓</div><div><span class="selected-kicker">SELECTED AIRCRAFT</span><strong id="summaryReg">GHFB</strong></div><span class="selected-badge" id="summaryAmend">Amendment 2</span></div>
+          <div class="selected-type" id="summaryType">C172S G1000</div>
+          <div class="selected-grid">
+            <div><span>Basic empty weight</span><strong id="summaryEmpty">1,685.92 lb</strong></div>
+            <div><span>Basic empty moment</span><strong id="summaryMoment">68,790.85 lb-in</strong></div>
+            <div><span>Max ramp</span><strong id="summaryRamp">2,558 lb</strong></div>
+            <div><span>Max takeoff</span><strong id="summaryTOW">2,550 lb</strong></div>
+            <div><span>Max landing</span><strong id="summaryLDW">2,550 lb</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Occupants</div>
+        <div class="grid2">
+          <div class="person"><div class="field"><label for="picWeight">PIC (Front Left)</label><input id="picWeight" type="number" min="0" step="0.1" inputmode="decimal" placeholder="180"></div></div>
+          <div class="person"><div class="field"><label for="frontPassenger">Front Passenger</label><input id="frontPassenger" type="number" min="0" step="0.1" inputmode="decimal" placeholder="0"></div></div>
+          <div class="person"><div class="field"><label for="rear1">Rear Passenger 1</label><input id="rear1" type="number" min="0" step="0.1" inputmode="decimal" placeholder="0"></div></div>
+          <div class="person"><div class="field"><label for="rear2">Rear Passenger 2</label><input id="rear2" type="number" min="0" step="0.1" inputmode="decimal" placeholder="0"></div></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Baggage</div>
+        <div class="grid2">
+          <div class="person"><div class="field"><label for="bag1">Forward Area 1</label><input id="bag1" type="number" min="0" max="120" step="0.1" inputmode="decimal" placeholder="0"><span class="input-max">Max 120 lb</span></div></div>
+          <div class="person"><div class="field"><label for="bag2">Aft Area 2</label><input id="bag2" type="number" min="0" max="50" step="0.1" inputmode="decimal" placeholder="0"><span class="input-max">Max 50 lb</span></div></div>
+        </div>
+        <div class="helper">Combined baggage limit: 120 lb. Arms: Area 1 = 95 in, Area 2 = 123 in.</div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Fuel</div>
+        <div class="grid2"><div class="person"><div class="field"><label for="fuel">Fuel Loading (US Gal)</label><input id="fuel" type="number" min="0" max="53" step="0.1" inputmode="decimal" placeholder="0–53"><span class="input-max">Max 53 gal</span></div></div><div class="person"><div class="field"><label for="fuelDest">Fuel to Destination (US Gal)</label><input id="fuelDest" type="number" min="0" step="0.1" inputmode="decimal" placeholder="e.g. 6.5"></div></div></div>
+        <div class="helper">POH fuel: 6 lb/US gal at 48 in. Maximum usable fuel: 53 US gal / 318 lb.</div>
+      </section>
+
+    </div>
+  </aside>
+
+  <section class="panel main-panel">
+    <div class="panel-head">WEIGHT AND BALANCE <span class="badge" id="dataBadge">Seneca Format</span></div>
+    <div class="table-wrap">
+      <table class="wb-table">
+        <thead><tr><th>ITEM</th><th>WEIGHT (lb)</th><th>MOMENT/1000</th><th>C.G. (in)</th></tr></thead>
+        <tbody id="paperBody"></tbody>
+      </table>
+    </div>
+    <div class="paper-note">Paperwork mode combines occupants into the Seneca worksheet rows. Fuel uses 6 lb/US gal at the C172S 48 in fuel arm. Start/taxi/run-up is included automatically.</div>
+    <div class="limit-grid">
+      <div class="limit-card"><h3>Aircraft Limitations</h3><ul class="limit-list"><li><span>Maximum Ramp Weight</span><b>2,558 lb</b></li><li><span>Maximum Takeoff Weight</span><b>2,550 lb</b></li><li><span>Maximum Landing Weight</span><b>2,550 lb</b></li><li><span>Maximum Usable Fuel</span><b>53 gal / 318 lb</b></li></ul></div>
+      <div class="limit-card"><h3>Baggage Limits</h3><ul class="limit-list"><li><span>Forward Area 1</span><b>120 lb</b></li><li><span>Aft Area 2</span><b>50 lb</b></li><li><span>Combined</span><b>120 lb</b></li><li><span>Front seat station</span><b>34–46 in</b></li></ul></div>
+    </div>
+  </section>
+
+  <section class="panel envelope-panel">
+    <div class="panel-head">C.G. ENVELOPE <span class="badge">C172S POH Figure 6-8</span></div>
+    <div class="panel-body">
+      <div class="chart-wrap"><div class="chart-tools" aria-label="Graph zoom controls"><button id="zoomOut" type="button" title="Zoom out">−</button><span class="zoom-label" id="zoomLabel">100%</span><button id="zoomIn" type="button" title="Zoom in">+</button><button id="zoomReset" type="button" title="Reset view">↺</button><button id="zoomFocus" type="button" title="Focus on takeoff">◎</button></div><svg class="chart" id="envelopeSvg" viewBox="0 0 760 600" role="img" aria-label="C172S center of gravity envelope"></svg><div class="chart-tooltip" id="chartTooltip"></div></div>
+      <div class="chart-hint">Tap or hover a condition point for exact weight, C.G., and applicable limits.</div><div class="legend">
+        <span><i class="linekey" style="background:#4fe15b"></i> Normal category</span>
+        <span><i class="linekey" style="background:#ffb21a"></i> Utility category</span>
+        <span><i class="dot" style="background:#1689ff"></i> Zero Fuel</span><span><i class="dot" style="background:#67e35d"></i> Ramp</span><span><i class="dot" style="background:#ff5b5b"></i> Takeoff</span><span><i class="dot" style="background:#c07cff"></i> Landing</span>
+      </div>
+      <div class="limit-columns">
+        <div class="category-card normal"><h3>Normal Category Limits</h3><p><b>1,500–2,550 lb</b></p><p>Forward: 35 in at 1,500–1,950 lb, increasing linearly to 41 in at 2,550 lb.</p><p>Aft: 47.3 in from 1,500–2,550 lb.</p></div>
+        <div class="category-card utility"><h3>Utility Category Limits</h3><p><b>1,500–2,200 lb</b></p><p>Forward: 35 in at 1,500–1,950 lb, then follows the Normal forward limit to 37.5 in at 2,200 lb.</p><p>Aft: 40.5 in from 1,500–2,200 lb.</p></div>
+      </div>
+      <div class="status-section"><div class="status-title">W&amp;B LIMIT CHECK</div><div class="status-grid">
+        <div class="status good" id="normalStatus"><h3>✓ NORMAL CATEGORY</h3><p>Enter loading to evaluate the takeoff point.</p></div>
+        <div class="status warn" id="utilityStatus"><h3>UTILITY CATEGORY</h3><p>Utility limits apply only through 2,200 lb.</p></div>
+      </div></div>
+    </div>
+  </section>
+</div>
+
+<section class="performance-module" id="perfModule" hidden>
+  <div class="perf-head">
+    <div><div class="perf-kicker">C172S • PERFORMANCE</div><h2>Takeoff &amp; Landing Performance</h2><p>Seneca-style performance workflow using the C172S short-field POH data.</p></div>
+  </div>
+  <div class="perf-grid">
+    <section class="perf-card">
+      <div class="perf-card-head"><div><span class="perf-number">01</span><h3>Departure</h3></div><span class="perf-badge">Short Field Take-Off</span></div>
+      <div class="perf-fields">
+        <div class="field"><label for="toElevation">Elevation (ft)</label><input id="toElevation" type="number" min="0" step="10" placeholder="e.g. 420"></div>
+        <div class="field"><label for="toRunwayHeading">Active Runway</label><input id="toRunwayHeading" type="text" inputmode="numeric" maxlength="3" placeholder="09"></div>
+        <div class="field"><label for="toWindVelocity">Wind Velocity</label><input id="toWindVelocity" type="text" inputmode="numeric" placeholder="090/10"></div>
+        <div class="field"><label for="toAltimeter">Alt. Setting (inHg)</label><input id="toAltimeter" type="number" min="28" max="31" step="0.01" placeholder="29.92"></div>
+        <div class="field"><label for="toTORA">TORA (ft)</label><input id="toTORA" type="number" min="0" step="10" placeholder="Runway available"></div>
+        <div class="field"><label for="toTODA">TODA (ft)</label><input id="toTODA" type="number" min="0" step="10" placeholder="Take-off distance available"></div>
+        <div class="field calculated-field"><label for="toPA">Pressure Altitude (ft)</label><input id="toPA" class="readonly" type="text" readonly></div>
+        <div class="field"><label for="toTemp">Temperature (°C)</label><input id="toTemp" type="number" min="-50" max="50" step="1" value="15"></div>
+        <div class="field calculated-field"><label for="toDA">Density Altitude (ft)</label><input id="toDA" class="readonly" type="text" readonly></div>
+        <div class="field calculated-field"><label for="toHWC">HWC (kt)</label><input id="toHWC" class="readonly" type="text" readonly></div>
+        <div class="field calculated-field"><label for="toXWC">XWC (kt)</label><input id="toXWC" class="readonly" type="text" readonly></div>
+        <div class="field"><label for="toSurface">Runway Surface</label><select id="toSurface"><option value="paved">Paved, level, dry</option><option value="grass">Dry grass</option></select></div>
+      </div>
+      <div class="perf-results" id="toResults"></div>
+    </section>
+
+    <section class="perf-card">
+      <div class="perf-card-head"><div><span class="perf-number">02</span><h3>Destination</h3></div><span class="perf-badge">Landing • Flaps 30°</span></div>
+      <div class="perf-fields">
+        <div class="field"><label for="ldElevation">Elevation (ft)</label><input id="ldElevation" type="number" min="0" step="10" placeholder="e.g. 420"></div>
+        <div class="field"><label for="ldRunwayHeading">Active Runway</label><input id="ldRunwayHeading" type="text" inputmode="numeric" maxlength="3" placeholder="09"></div>
+        <div class="field"><label for="ldWindVelocity">Wind Velocity</label><input id="ldWindVelocity" type="text" inputmode="numeric" placeholder="090/10"></div>
+        <div class="field"><label for="ldAltimeter">Alt. Setting (inHg)</label><input id="ldAltimeter" type="number" min="28" max="31" step="0.01" placeholder="29.92"></div>
+        <div class="field"><label for="ldLDA">LDA (ft)</label><input id="ldLDA" type="number" min="0" step="10" placeholder="Landing distance available"></div>
+        <div class="field"><label for="ldTemp">Temperature (°C)</label><input id="ldTemp" type="number" min="-50" max="50" step="1" value="15"></div>
+        <div class="field calculated-field"><label for="ldPA">Pressure Altitude (ft)</label><input id="ldPA" class="readonly" type="text" readonly></div>
+        <div class="field calculated-field"><label for="ldDA">Density Altitude (ft)</label><input id="ldDA" class="readonly" type="text" readonly></div>
+        <div class="field calculated-field"><label for="ldHWC">HWC (kt)</label><input id="ldHWC" class="readonly" type="text" readonly></div>
+        <div class="field calculated-field"><label for="ldXWC">XWC (kt)</label><input id="ldXWC" class="readonly" type="text" readonly></div>
+        <div class="field"><label for="ldSurface">Runway Surface</label><select id="ldSurface"><option value="paved">Paved, level, dry</option><option value="grass">Dry grass</option></select></div>
+        <div class="field"><label for="minFuel">Minimum Fuel Required (US Gal)</label><input id="minFuel" type="number" min="0" step="0.1" placeholder="Enter required fuel"></div>
+      </div>
+      <div class="perf-results" id="ldResults"></div>
+    </section>
+  </div>
+  <div class="perf-notes">
+    <div class="perf-note"><b>Chart method</b><br>Takeoff uses the next higher published chart weight, pressure altitude and temperature. Landing uses the published 2,550 lb short-field chart; actual landing weight is shown separately.</div>
+    <div class="perf-note"><b>Wind corrections</b><br>Headwind decreases distance 10% per 9 kt. Tailwind increases distance 10% per 2 kt, up to 10 kt. Dry grass adds 15% of takeoff ground roll or 45% of landing ground roll.</div>
+    <div class="perf-note warning"><b>Runway inputs</b><br>TORA/TODA/LDA are displayed for the Seneca worksheet and runway checks. Slopes, wet/contaminated surfaces and unlisted conditions are not modeled.</div>
+  </div>
+</section>
+
+<section class="paperwork-module" id="paperworkModule" hidden>
+  <div class="paperwork-page-head">
+    <div><div class="perf-kicker">SENECA POLYTECHNIC • PAPERWORK</div><h2>Completed Flight Forms</h2><p>Review the completed Weight &amp; Balance Worksheet and Aircraft Performance Calculations before printing.</p></div>
+    <div class="paperwork-actions"><button class="btn" id="paperworkRefresh">↻ Refresh Forms</button><button class="btn primary" id="paperworkPrint">▤ Print / Export PDF</button></div>
+  </div>
+  <div id="paperworkCompleteBanner" class="paperwork-banner"></div>
+  <div class="paperwork-cards">
+    <article class="paperwork-card wb-paper-card"><div class="paperwork-card-head"><div><span class="paper-icon">⚖</span><div><h3>Weight &amp; Balance Form</h3><p id="wbPaperSubtitle">Seneca Weight and Balance Work Sheet — C172S</p></div></div><span class="form-badge">Form #301 2025-1</span></div><div class="paper-preview" id="wbPaperPreview"></div></article>
+    <article class="paperwork-card perf-paper-card"><div class="paperwork-card-head"><div><span class="paper-icon">✈</span><div><h3>Performance Form</h3><p>Seneca Aircraft Performance Calculations — C172S</p></div></div><span class="form-badge">Form #301 2025-1</span></div><div class="paper-preview" id="perfPaperPreview"></div></article>
+  </div>
+</section>
+
+<div class="settings-overlay" id="settingsOverlay" aria-hidden="true">
+  <div class="settings-modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+    <div class="settings-head"><h2 id="settingsTitle">Aircraft W&amp;B Settings</h2><button class="settings-close" id="settingsClose" aria-label="Close settings">×</button></div>
+    <div class="settings-body">
+      <div class="settings-note">Update the active <b>Basic Empty Weight</b>, <b>Basic Empty Moment</b>, and <b>Amendment</b> for each registration. When Seneca issues a newer amendment, enter its new values here and save. The app keeps one active W&amp;B record per registration.</div>
+      <div class="settings-grid">
+        <div class="field"><label for="settingsAircraft">Aircraft Registration</label><select id="settingsAircraft"></select></div>
+        <div class="field"><label for="settingsType">Aircraft Type</label><input id="settingsType" type="text" placeholder="C172S G1000"></div>
+        <div class="field"><label for="settingsAmend">W&amp;B Amendment</label><input id="settingsAmend" type="number" min="0" step="1"></div>
+        <div class="field"><label for="settingsEmpty">Basic Empty Weight (lb)</label><input id="settingsEmpty" type="number" min="0" step="0.01"></div>
+        <div class="field"><label for="settingsMoment">Basic Empty Moment (lb-in)</label><input id="settingsMoment" type="number" min="0" step="0.01"></div>
+      </div>
+      <div class="modal-error" id="settingsError"></div>
+      <div class="settings-actions"><button class="btn" id="settingsCancel">Cancel</button><button class="btn primary" id="settingsSave">Save Aircraft Data</button></div>
+      <hr class="settings-divider">
+      <div class="settings-subtitle">Add a new aircraft registration</div>
+      <div class="settings-add">
+        <div class="field"><label for="newReg">Registration</label><input id="newReg" type="text" placeholder="e.g. GABC"></div>
+        <div class="field"><label for="newType">Aircraft Type</label><input id="newType" type="text" placeholder="C172S G1000"></div>
+        <div class="field"><label for="newAmend">Amendment</label><input id="newAmend" type="number" min="0" step="1" value="1"></div>
+        <div class="field"><label for="newEmpty">Basic Empty Weight (lb)</label><input id="newEmpty" type="number" min="0" step="0.01"></div>
+        <div class="field"><label for="newMoment">Basic Empty Moment (lb-in)</label><input id="newMoment" type="number" min="0" step="0.01"></div>
+      </div>
+      <div class="settings-actions"><button class="btn" id="addAircraftBtn">＋ Add Aircraft</button></div>
+      <div class="settings-list" id="settingsList"></div>
+    </div>
+  </div>
+</div>
+
+<div class="bottom-actions"><button class="btn" id="clearBtn">⌫ Clear All</button><button class="btn" id="saveBtn">▣ Save Flight</button><button class="btn" id="printBtn">▤ Generate PDF</button><button class="btn primary" id="newBtn">＋ New Flight</button></div>
+<div class="footer-note">Planning aid only. Verify aircraft-specific W&amp;B records, POH/AFM limitations and Seneca procedures before flight.</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const DEFAULT_AIRCRAFT=[
+ ['FASC','C172S G1000',1697.32,70657.73,3],['FESC','C172S G1000',1648.72,66115.33,3],['GPWD','C172S G1000',1672.62,68063.00,3],['GHFB','C172S G1000',1685.92,68790.85,2],
+ ['FSEV','C172S G1000 AP',1711.02,72946.33,5],['GSEO','C172S G1000 AP',1710.62,72719.91,5],['GSEU','C172S G1000 AP',1710.62,72719.91,5],['GSEY','C172S G1000 AP',1708.22,72625.41,6],
+ ['FSCG','C172S',1669.55,67274.36,13],['FSCF','C172S',1667.91,67730.24,13],['FSCL','C172S',1680.07,67805.52,10],['GSCB','C172S',1713.37,68880.12,5],['GSCT','C172S',1667.26,67182.33,11],['GSCR','C172S',1666.91,67274.75,13],['GSEQ','C172S',1678.68,67685.23,11],
+ ['GPIN','BE58',3884.70,299532.03,25],['GGER','BE58',3871.94,299069.90,17],['FDTS','BE58 G1000',3956.37,307896.06,7],['FDAA','BE58 G1000',3978.64,318487.44,3]
+].map(x=>({reg:x[0],type:x[1],empty:x[2],moment:x[3],amend:x[4]}));
+let AIRCRAFT=[];
+function loadAircraftData(){try{const saved=JSON.parse(localStorage.getItem('senecaAircraftDataV01'));const base=DEFAULT_AIRCRAFT.map(a=>({...a}));if(Array.isArray(saved)&&saved.length){const byReg=new Map(saved.map(a=>[a.reg,a]));AIRCRAFT=base.map(a=>byReg.get(a.reg)?{...a,...byReg.get(a.reg)}:a);saved.forEach(a=>{if(!base.some(b=>b.reg===a.reg))AIRCRAFT.push({...a})})}else AIRCRAFT=base}catch(e){AIRCRAFT=DEFAULT_AIRCRAFT.map(a=>({...a}))}}
+function persistAircraftData(){localStorage.setItem('senecaAircraftDataV01',JSON.stringify(AIRCRAFT));}
+const ARM={front:37,aft:73,bag1:95,bag2:123,fuel:48};
+const LIM={ramp:2558,takeoff:2550,landing:2550,usableFuel:53,fuelLb:6,taxiGal:1.4,taxiLb:8.4,bag1:120,bag2:50,baggageTotal:120};
+const $=id=>document.getElementById(id); const n=id=>Math.max(0,Number($(id).value)||0); const fmt=(v,d=0)=>Number(v).toLocaleString('en-CA',{minimumFractionDigits:d,maximumFractionDigits:d});
+function aircraft(){return AIRCRAFT.find(a=>a.reg===$('aircraft').value)||AIRCRAFT.find(a=>a.reg==='GHFB')}
+function cgLimitsNormal(weight){if(weight<1500||weight>2550)return null;let f=35;if(weight>1950)f=35+(weight-1950)*(41-35)/(2550-1950);return{forward:f,aft:47.3}}
+function cgLimitsUtility(weight){if(weight<1500||weight>2200)return null;let f=35;if(weight>1950)f=35+(weight-1950)*(37.5-35)/(2200-1950);return{forward:f,aft:40.5}}
+function inside(p,cat){const l=cat==='utility'?cgLimitsUtility(p.weight):cgLimitsNormal(p.weight);return !!l&&p.cg>=l.forward-1e-8&&p.cg<=l.aft+1e-8}
+function cond(weight,moment){return{weight,moment,cg:weight?moment/weight:null}}
+function calcC172Legacy(){
+ const a=aircraft(); const front=n('picWeight')+n('frontPassenger'); const aft=n('rear1')+n('rear2'); const b1=n('bag1'),b2=n('bag2'); const fuel=n('fuel'),dest=n('fuelDest');
+ const items=[['Empty',a.empty,a.moment],['Front Seats',front,front*ARM.front],['Aft Seats',aft,aft*ARM.aft],['Forward Baggage',b1,b1*ARM.bag1],['Aft Baggage',b2,b2*ARM.bag2]];
+ const z=cond(items.reduce((s,x)=>s+x[1],0),items.reduce((s,x)=>s+x[2],0));
+ const fuelW=fuel*LIM.fuelLb, fuelM=fuelW*ARM.fuel; const ramp=cond(z.weight+fuelW,z.moment+fuelM); const taxiM=LIM.taxiLb*ARM.fuel; const take=cond(ramp.weight-LIM.taxiLb,ramp.moment-taxiM); const destW=dest*LIM.fuelLb,destM=destW*ARM.fuel; const land=cond(take.weight-destW,take.moment-destM);
+ renderAircraftC172(a); renderPaperC172(items,z,ramp,take,land,fuelW,fuelM,destW,destM,dest); renderEnvelope({z,ramp,take,land}); renderPerformance();renderPaperwork();
+ $('frontTotal')?.remove(); $('aftTotal')?.remove();
+ saveDraft();
+}
+function displayAircraftType(type){return type.replace(/\s+AP\b/g,' Autopilot')}
+function renderAircraftC172(a){
+ $('summaryReg').textContent=a.reg;$('summaryType').textContent=displayAircraftType(a.type);$('summaryAmend').textContent='Amendment '+a.amend;$('summaryEmpty').textContent=fmt(a.empty,2)+' lb';$('summaryMoment').textContent=fmt(a.moment,2)+' lb-in';$('summaryRamp').textContent=fmt(LIM.ramp,0)+' lb';$('summaryTOW').textContent=fmt(LIM.takeoff,0)+' lb';$('summaryLDW').textContent=fmt(LIM.landing,0)+' lb';
+ $('title').textContent='C172S – Weight & Balance';
+ const head=document.querySelector('#wbModule .panel-head');if(head)head.innerHTML='WEIGHT AND BALANCE <span class="badge">Seneca Format</span>';
+ const note=document.querySelector('#wbModule .paper-note');if(note)note.textContent='Paperwork mode combines occupants into the Seneca worksheet rows. Fuel uses 6 lb/US gal at the C172S 48 in fuel arm. Start/taxi/run-up is included automatically.';
+ const ep=document.querySelector('#wbModule .envelope-panel .panel-head');if(ep)ep.innerHTML='C.G. ENVELOPE <span class="badge">C172S POH Figure 6-8</span>';
+ const cats=document.querySelector('#wbModule .limit-columns');if(cats)cats.innerHTML=C172_LIMIT_COLUMNS_MARKUP;
+ const legend=document.querySelector('#wbModule .legend');if(legend)legend.style.display='';
+ const limitGrid=document.querySelector('#wbModule .limit-grid');if(limitGrid)limitGrid.innerHTML=C172_LIMIT_GRID_MARKUP;
+ renderLoadingInputs();
+}
+function okText(p,limit){return p.weight<=limit&&inside(p,'normal')}
+function renderPaperC172(items,z,ramp,take,land,fuelW,fuelM,destW,destM,dest){
+ const a=aircraft();
+ const row=(label,w,m,c='',cls='')=>`<tr class="${cls}"><td class="item">${label}</td><td>${fmt(w,2)}</td><td>${fmt(m/1000,3)}</td><td class="cg">${c===''?'':fmt(c,2)+'"'}</td></tr>`;
+ const conditionRow=(label,p,kind)=>{
+   const limit=kind==='ramp'?LIM.ramp:kind==='takeoff'?LIM.takeoff:kind==='landing'?LIM.landing:null;
+   const normal=cgLimitsNormal(p.weight);
+   const weightOK=limit===null ? true : p.weight<=limit;
+   const normalOK=!!normal&&weightOK&&inside(p,'normal');
+   const statusClass=normalOK?'good':'bad';
+   const statusText=normalOK?'WITHIN NORMAL':'OUTSIDE NORMAL';
+   let detail='';
+   if(limit!==null && !weightOK) detail=`Weight ${fmt(p.weight,1)} lb exceeds ${fmt(limit,0)} lb limit.`;
+   else if(normal) detail=`CG limit ${fmt(normal.forward,2)}–${fmt(normal.aft,1)} in`;
+   else detail='Weight is outside the Normal-category CG envelope.';
+   if(normal && weightOK){
+      const fMargin=p.cg-normal.forward, aMargin=normal.aft-p.cg;
+      detail += ` • Fwd ${fmt(fMargin,2)}" / Aft ${fmt(aMargin,2)}" margin`;
+   }
+   return `<tr class="total condition"><td class="item">${label}<span class="condition-badge ${statusClass}">${statusText}</span><span class="condition-meta ${statusClass}">${detail}</span></td><td>${fmt(p.weight,2)}</td><td>${fmt(p.moment/1000,3)}</td><td class="cg">${fmt(p.cg,2)}"</td></tr>`;
+ };
+ let html=items.map(x=>row(x[0],x[1],x[2],'','input-row')).join('');
+ html+=conditionRow('ZERO FUEL CONDITION',z,'zfw');
+ html+=row(`Fuel Loading (${fmt(n('fuel'),1)} US Gal)`,fuelW,fuelM,'','fuel input-row');
+ html+=conditionRow('RAMP CONDITION',ramp,'ramp');
+ html+=row('Fuel for Start, Taxi, and Run Up (1.4 gal)',-LIM.taxiLb,-LIM.taxiLb*ARM.fuel,'','negative input-row');
+ html+=conditionRow('TAKE-OFF CONDITION',take,'takeoff');
+ html+=row(`Fuel to Destination (${fmt(dest,1)} US Gal)`,-destW,-destM,'','negative input-row');
+ html+=conditionRow('LANDING CONDITION',land,'landing');
+ $('paperBody').innerHTML=html;
+}
+let chartZoom=1, chartFocusX=null, chartFocusY=null, lastEnvelopeState=null;
+function renderCurrentEnvelope(s){if(!s)return;if(isBaron())renderBaronEnvelope(s);else renderEnvelope(s)}
+function setZoom(z){chartZoom=Math.max(1,Math.min(3,z));renderCurrentEnvelope(lastEnvelopeState);$('zoomLabel').textContent=Math.round(chartZoom*100)+'%'}
+function focusTakeoff(){if(!lastEnvelopeState)return;chartFocusX=lastEnvelopeState.take.cg;chartFocusY=lastEnvelopeState.take.weight;setZoom(Math.max(chartZoom,1.7))}
+function renderEnvelope(s){lastEnvelopeState=s;
+ const svg=$('envelopeSvg'),wrap=svg.parentElement,tooltip=$('chartTooltip'),W=760,H=600,L=72,R=25,T=28,B=62,iw=W-L-R,ih=H-T-B;
+ const baseX=[32,52],baseY=[1300,2700];
+ let xSpan=(baseX[1]-baseX[0])/chartZoom, ySpan=(baseY[1]-baseY[0])/chartZoom;
+ const fx=chartFocusX??(baseX[0]+baseX[1])/2, fy=chartFocusY??(baseY[0]+baseY[1])/2;
+ const xMin=Math.max(baseX[0],Math.min(baseX[1]-xSpan,fx-xSpan/2)), xMax=xMin+xSpan;
+ const yMin=Math.max(baseY[0],Math.min(baseY[1]-ySpan,fy-ySpan/2)), yMax=yMin+ySpan;
+ const X=x=>L+(x-xMin)/(xMax-xMin)*iw, Y=y=>T+(yMax-y)/(yMax-yMin)*ih, clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+ const normal=[[35,1500],[35,1950],[41,2550],[47.3,2550],[47.3,1500]];
+ const utility=[[35,1500],[35,1950],[37.5,2200],[40.5,2200],[40.5,1500]];
+ const poly=p=>p.map(q=>`${X(q[0]).toFixed(1)},${Y(q[1]).toFixed(1)}`).join(' ');
+ let out=`<rect width="${W}" height="${H}" fill="#071a2a"/>`;
+ out+=`<g stroke="#254055" stroke-width="1">`;
+ const xStep=chartZoom>=2?1:2, yStep=chartZoom>=2?100:200;
+ for(let c=Math.ceil(xMin/xStep)*xStep;c<=xMax+1e-9;c+=xStep)out+=`<line x1="${X(c)}" y1="${T}" x2="${X(c)}" y2="${T+ih}"/>`;
+ for(let w=Math.ceil(yMin/yStep)*yStep;w<=yMax+1e-9;w+=yStep)out+=`<line x1="${L}" y1="${Y(w)}" x2="${L+iw}" y2="${Y(w)}"/>`;
+ out+=`</g>`;
+ out+=`<polygon points="${poly(normal)}" fill="#2edc5b" fill-opacity=".10" stroke="#55e15d" stroke-width="3"/>`;
+ out+=`<polygon points="${poly(utility)}" fill="#ffb21a" fill-opacity=".12" stroke="#ffb21a" stroke-width="3"/>`;
+ out+=`<text x="${X(44)}" y="${Y(2050)}" fill="#70e86a" font-size="17" font-weight="800" text-anchor="middle">NORMAL</text>`;
+ out+=`<text x="${X(37.1)}" y="${Y(1775)}" fill="#ffc13a" font-size="16" font-weight="800" text-anchor="middle">UTILITY</text>`;
+ out+=`<g fill="#9eb0c2" font-size="12" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">`;
+ for(let c=Math.ceil(xMin/xStep)*xStep;c<=xMax+1e-9;c+=xStep)out+=`<text x="${X(c)}" y="${H-34}" text-anchor="middle">${Number(c).toFixed(c%1?1:0)}</text>`;
+ for(let w=Math.ceil(yMin/yStep)*yStep;w<=yMax+1e-9;w+=yStep)out+=`<text x="${L-10}" y="${Y(w)+4}" text-anchor="end">${fmt(w)}</text>`;
+ out+=`<text x="${L+iw/2}" y="${H-10}" text-anchor="middle">C.G. location (inches aft of datum)</text><text transform="translate(18 ${T+ih/2}) rotate(-90)" text-anchor="middle">Loaded airplane weight (lb)</text></g>`;
+
+ const pts=[
+   ['Zero Fuel',s.z,'#1689ff'],
+   ['Ramp',s.ramp,'#67e35d'],
+   ['Takeoff',s.take,'#ff5b5b'],
+   ['Landing',s.land,'#c07cff']
+ ];
+ const pointMeta=[];
+ pts.forEach(([name,p,color])=>{
+   if(!p.weight)return;
+   const cx=clamp(p.cg,xMin,xMax),cy=clamp(p.weight,yMin,yMax);
+   const outx=p.cg<xMin||p.cg>xMax,outy=p.weight<yMin||p.weight>yMax;
+   const normalL=cgLimitsNormal(p.weight), utilityL=cgLimitsUtility(p.weight);
+   const normalOK=inside(p,'normal');
+   const utilityOK=inside(p,'utility');
+   const marker=`<g class="chart-point" tabindex="0" data-name="${name}" data-weight="${p.weight}" data-cg="${p.cg}" data-normal="${normalL?fmt(normalL.forward,2)+'–'+fmt(normalL.aft,1):'N/A'}" data-utility="${utilityL?fmt(utilityL.forward,2)+'–'+fmt(utilityL.aft,1):'N/A'}" data-normalok="${normalOK}" data-utilityok="${utilityOK}">`;
+   if(outx||outy){
+     out+=marker+`<path d="M ${X(cx)-8} ${Y(cy)+8} L ${X(cx)} ${Y(cy)-9} L ${X(cx)+8} ${Y(cy)+8} Z" fill="${color}" stroke="#fff" stroke-width="2"/>`;
+   } else {
+     out+=marker+`<circle cx="${X(cx)}" cy="${Y(cy)}" r="7" fill="${color}" stroke="#fff" stroke-width="2"/>`;
+   }
+   out+=`</g>`;
+   pointMeta.push({name,p,cx,cy,color,outx,outy});
+ });
+ svg.innerHTML=out;
+
+ // Tooltip interaction replaces permanent labels, preventing overlap while keeping the graph clean.
+ const showPoint = el => {
+   const name=el.dataset.name, weight=Number(el.dataset.weight), cg=Number(el.dataset.cg);
+   const normal=el.dataset.normal, utility=el.dataset.utility;
+   const normalOk=el.dataset.normalok==='true', utilityOk=el.dataset.utilityok==='true';
+   const utilityText=utility==='N/A' ? 'Not applicable at this weight' : `${utility}" ${utilityOk?'✓ within':'✕ outside'}`;
+   tooltip.innerHTML=`<strong>${name}</strong><span>Weight: ${fmt(weight,1)} lb<br>C.G.: ${fmt(cg,2)} in<br>Normal: ${normal}" ${normalOk?'✓':'✕'}<br>Utility: ${utilityText}</span>`;
+   const box=wrap.getBoundingClientRect(), r=el.getBoundingClientRect();
+   let left=r.left-box.left+r.width+10, top=r.top-box.top-10;
+   if(left+185>box.width)left=r.left-box.left-195;
+   if(top<8)top=8;
+   if(top+92>box.height)top=Math.max(8,box.height-100);
+   tooltip.style.left=`${left}px`; tooltip.style.top=`${top}px`; tooltip.classList.add('show');
+ };
+ svg.querySelectorAll('.chart-point').forEach(el=>{
+   el.addEventListener('mouseenter',()=>showPoint(el));
+   el.addEventListener('mouseleave',()=>tooltip.classList.remove('show'));
+   el.addEventListener('focus',()=>showPoint(el));
+   el.addEventListener('blur',()=>tooltip.classList.remove('show'));
+   el.addEventListener('click',e=>{e.stopPropagation();showPoint(el)});
+ });
+ wrap.onclick=()=>tooltip.classList.remove('show');
+
+ const normalOk=inside(s.take,'normal')&&s.take.weight<=LIM.takeoff, utilityOk=inside(s.take,'utility');
+ const nl=cgLimitsNormal(s.take.weight),ul=cgLimitsUtility(s.take.weight);
+ const ns=$('normalStatus'),us=$('utilityStatus');
+ ns.className='status '+(normalOk?'good':'bad');
+ ns.innerHTML=normalOk?`<h3>✓ WITHIN NORMAL LIMITS</h3><p>Takeoff: ${fmt(s.take.weight,1)} lb • CG ${fmt(s.take.cg,2)} in. Allowable at this weight: ${fmt(nl.forward,2)}–${fmt(nl.aft,1)} in.</p>`:`<h3>✕ OUTSIDE NORMAL LIMITS</h3><p>Takeoff: ${fmt(s.take.weight,1)} lb • CG ${fmt(s.take.cg,2)} in. ${s.take.weight>2550?'Weight exceeds 2,550 lb.':nl?`Allowable CG: ${fmt(nl.forward,2)}–${fmt(nl.aft,1)} in.`:'Weight outside CG envelope.'}</p>`;
+ us.className='status '+(utilityOk?'warn':'bad');
+ us.innerHTML=utilityOk?`<h3>✓ WITHIN UTILITY LIMITS</h3><p>Takeoff is within the Utility envelope at ${fmt(s.take.weight,1)} lb. Allowable CG: ${fmt(ul.forward,2)}–${fmt(ul.aft,1)} in.</p>`:`<h3>${s.take.weight>2200?'UTILITY LIMIT EXCEEDED':'✕ OUTSIDE UTILITY LIMITS'}</h3><p>${s.take.weight>2200?'Utility category is limited to 2,200 lb.':ul?`CG ${fmt(s.take.cg,2)} in is outside the Utility range ${fmt(ul.forward,2)}–${fmt(ul.aft,1)} in.`:'Weight is below the 1,500 lb Utility-envelope range.'}</p>`;
+}
+
+/* ==================== BARON B58 / G58 W&B ADDITIONS ==================== */
+const BARON_REGS=new Set(['GPIN','GGER','FDTS','FDAA']);
+const BARON_LIM={ramp:5524,takeoff:5500,landing:5400,usableFuel:194,fuelLb:6,taxiLb:24,taxiMoment100:20};
+const BARON_FUEL_GAL=[10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,160,166,170,180,190,194];
+const BARON_FUEL_M100=[46,92,140,189,238,288,338,388,439,489,539,590,641,692,743,793,824,845,899,953,974];
+const BARON_FRONT_DEFAULT_ARM=80.0, BARON_REAR_DEFAULT_ARM=117.5, BARON_NOSE_DEFAULT_ARM=15.0, BARON_REAR_BAG_ARM=150, BARON_AFT_BAG_ARM=180;
+function baronArm(id, fallback){const v=n(id);return Number.isFinite(v)&&v>0?v:fallback}
+function isBaron(){const a=aircraft();return !!a&&(BARON_REGS.has(a.reg)||/^BE58\b/.test(a.type||''))}
+function baronInterp(xs,ys,x){if(x<=xs[0])return ys[0];if(x>=xs[xs.length-1])return ys[ys.length-1];for(let i=1;i<xs.length;i++){if(x<=xs[i]){const t=(x-xs[i-1])/(xs[i]-xs[i-1]);return ys[i-1]+t*(ys[i]-ys[i-1])}}return ys[ys.length-1]}
+function baronFuelMoment(gal){const g=Math.max(0,Math.min(BARON_LIM.usableFuel,Number(gal)||0));return baronInterp(BARON_FUEL_GAL,BARON_FUEL_M100,g)}
+function baronFuelWeight(gal){return Math.max(0,Math.min(BARON_LIM.usableFuel,Number(gal)||0))*BARON_LIM.fuelLb}
+function baronForwardLimit(w){if(!Number.isFinite(w)||w<3600||w>5500)return null;if(w<=4200)return 74;return w<=5400?74+(w-4200)*(78-74)/1200:78+(w-5400)*(78.3-78)/100}
+function baronLimits(w){const f=baronForwardLimit(w);return f===null?null:{forward:f,aft:86}}
+function baronInside(p){const l=baronLimits(p.weight);return !!l&&p.cg>=l.forward-1e-8&&p.cg<=l.aft+1e-8}
+function baronCond(weight,moment){return{weight,moment,cg:weight?moment/weight:null}}
+function baronField(id,label,value='',min='0',max='',step='0.1',hint=''){return `<div class="person"><div class="field"><label for="${id}">${label}</label><input id="${id}" type="number" min="${min}" ${max!==''?`max="${max}"`:''} step="${step}" inputmode="decimal" value="${value}">${hint?`<span class="input-max">${hint}</span>`:''}</div></div>`}
+function baronInputMarkup(){return `
+ <div id="baronLoadingInputs">
+  <section class="section"><div class="section-title">Occupants — weight &amp; arm</div><div class="grid2">
+   ${baronField('picWeight','PIC (Front Left)','',0,'','0.1')}${baronField('frontPassenger','Front Passenger','',0,'','0.1')}${baronField('rear1','Rear Passenger 1','',0,'','0.1')}${baronField('rear2','Rear Passenger 2','',0,'','0.1')}
+  </div><div class="baron-arm-grid">
+   ${baronField('picArm','PIC Arm (in)',BARON_FRONT_DEFAULT_ARM,75,82,'0.1','Published front-seat range 75–82 in')}
+   ${baronField('frontPassengerArm','Front Passenger Arm (in)',BARON_FRONT_DEFAULT_ARM,75,82,'0.1','Published front-seat range 75–82 in')}
+   ${baronField('rear1Arm','Rear Passenger 1 Arm (in)',BARON_REAR_DEFAULT_ARM,115,120,'0.1','Published rear-seat range 115–120 in')}
+   ${baronField('rear2Arm','Rear Passenger 2 Arm (in)',BARON_REAR_DEFAULT_ARM,115,120,'0.1','Published rear-seat range 115–120 in')}
+  </div><div class="baron-arm-note">Each occupant arm is now adjustable. Defaults remain the Seneca worksheet averages: front 80.0 in and rear 117.5 in.</div></section>
+  <section class="section"><div class="section-title">Baggage — weight &amp; arm</div><div class="grid2">
+   ${baronField('bag1','Nose Baggage Weight','',0,300,'0.1','Max 300 lb')}${baronField('bag2','Rear Baggage Weight','',0,400,'0.1','Main cabin total 400 lb')}${baronField('bag3','Aft Baggage Weight','',0,120,'0.1','Extended aft max 120 lb')}
+  </div><div class="baron-arm-grid">
+   ${baronField('bag1Arm','Nose Baggage Arm (in)',BARON_NOSE_DEFAULT_ARM,0,'','0.1','Default worksheet arm 15.0 in')}
+   ${baronField('bag2Arm','Rear Baggage Arm (in)',BARON_REAR_BAG_ARM,0,'','0.1','Default worksheet arm 150.0 in')}
+   ${baronField('bag3Arm','Aft Baggage Arm (in)',BARON_AFT_BAG_ARM,0,'','0.1','Default worksheet arm 180.0 in')}
+  </div><div class="baron-arm-note">Use the actual loading station/arm from the applicable aircraft W&amp;B data when it differs from the worksheet average.</div></section>
+  <section class="section"><div class="section-title">Fuel</div><div class="grid2">
+   ${baronField('fuel','Fuel Loading (US Gal)','',0,194,'0.1','Max 194 usable gal')}${baronField('fuelDest','Fuel at Destination (US Gal)','',0,194,'0.1','Remaining usable fuel')}
+  </div><div class="helper">Seneca Baron fuel: 200 US gal total / 194 gal usable. Fuel is 6 lb/US gal. Landing fuel moment is taken from the POH variable-arm usable-fuel table.</div></section>
+ </div>`}
+
+const C172_LOADING_MARKUP=`
+ <section class="section"><div class="section-title">Occupants</div><div class="grid2">
+  <div class="person"><div class="field"><label for="picWeight">PIC (Front Left)</label><input id="picWeight" type="number" min="0" step="0.1" inputmode="decimal" placeholder="180"></div></div>
+  <div class="person"><div class="field"><label for="frontPassenger">Front Passenger</label><input id="frontPassenger" type="number" min="0" step="0.1" inputmode="decimal" placeholder="0"></div></div>
+  <div class="person"><div class="field"><label for="rear1">Rear Passenger 1</label><input id="rear1" type="number" min="0" step="0.1" inputmode="decimal" placeholder="0"></div></div>
+  <div class="person"><div class="field"><label for="rear2">Rear Passenger 2</label><input id="rear2" type="number" min="0" step="0.1" inputmode="decimal" placeholder="0"></div></div>
+ </div></section>
+ <section class="section"><div class="section-title">Baggage</div><div class="grid2">
+  <div class="person"><div class="field"><label for="bag1">Forward Area 1</label><input id="bag1" type="number" min="0" max="120" step="0.1" inputmode="decimal" placeholder="0"><span class="input-max">Max 120 lb</span></div></div>
+  <div class="person"><div class="field"><label for="bag2">Aft Area 2</label><input id="bag2" type="number" min="0" max="50" step="0.1" inputmode="decimal" placeholder="0"><span class="input-max">Max 50 lb</span></div></div>
+ </div><div class="helper">Combined baggage limit: 120 lb. Arms: Area 1 = 95 in, Area 2 = 123 in.</div></section>
+ <section class="section"><div class="section-title">Fuel</div><div class="grid2"><div class="person"><div class="field"><label for="fuel">Fuel Loading (US Gal)</label><input id="fuel" type="number" min="0" max="53" step="0.1" inputmode="decimal" placeholder="0–53"><span class="input-max">Max 53 gal</span></div></div><div class="person"><div class="field"><label for="fuelDest">Fuel to Destination (US Gal)</label><input id="fuelDest" type="number" min="0" step="0.1" inputmode="decimal" placeholder="e.g. 6.5"></div></div></div><div class="helper">POH fuel: 6 lb/US gal at 48 in. Maximum usable fuel: 53 US gal / 318 lb.</div></section>`;
+function renderLoadingInputs(){const body=document.querySelector('#wbModule aside .panel-body');if(!body)return;const old=body.querySelector('#baronLoadingInputs');const sections=Array.from(body.querySelectorAll(':scope > .section'));if(isBaron()){sections.slice(1).forEach(el=>el.remove());if(!body.querySelector('#baronLoadingInputs'))body.insertAdjacentHTML('beforeend',baronInputMarkup())}else{if(old)old.remove();const now=Array.from(body.querySelectorAll(':scope > .section'));if(now.length===1)body.insertAdjacentHTML('beforeend',C172_LOADING_MARKUP)}}
+function baronAircraftType(a){return a.type.includes('G1000')?'BE58 G1000':'BE58'}
+function renderAircraftBaronAware(a){$('summaryReg').textContent=a.reg;$('summaryType').textContent=isBaron()?baronAircraftType(a):displayAircraftType(a.type);$('summaryAmend').textContent='Amendment '+a.amend;$('summaryEmpty').textContent=fmt(a.empty,2)+' lb';$('summaryMoment').textContent=fmt(a.moment,2)+' lb-in';const L=isBaron()?BARON_LIM:LIM;$('summaryRamp').textContent=fmt(L.ramp,0)+' lb';$('summaryTOW').textContent=fmt(L.takeoff,0)+' lb';$('summaryLDW').textContent=fmt(L.landing,0)+' lb';$('title').textContent=isBaron()?'BE58 – Weight & Balance':'C172S – Weight & Balance';const head=document.querySelector('#wbModule .panel-head');if(head)head.innerHTML=`WEIGHT AND BALANCE <span class="badge">${isBaron()?'Seneca Baron Format':'Seneca Format'}</span>`;const note=document.querySelector('#wbModule .paper-note');if(note)note.textContent=isBaron()?'Baron worksheet: front/rear seat and baggage arms follow the Seneca B58/G58 worksheet. Fuel uses 6 lb/US gal with the 194-gallon usable-fuel variable-arm table.':'Paperwork mode combines occupants into the Seneca worksheet rows. Fuel uses 6 lb/US gal at the C172S 48 in fuel arm. Start/taxi/run-up is included automatically.';const ep=document.querySelector('#wbModule .envelope-panel .panel-head');if(ep)ep.innerHTML=`C.G. ENVELOPE <span class="badge">${isBaron()?'BE58 / G58 POH':'C172S POH Figure 6-8'}</span>`;const cats=document.querySelector('#wbModule .limit-columns');if(cats)cats.innerHTML=isBaron()?`<div class="category-card normal"><h3>BE58 CG LIMITS</h3><p><b>Forward: 74.0 in at 4,200 lb and under</b></p><p>Forward limit increases linearly to 78.0 in at 5,400 lb and 78.3 in at 5,500 lb.</p><p>Aft: <b>86.0 in</b> at all weights.</p></div><div class="category-card utility"><h3>SENECA BARON CONFIGURATION</h3><p><b>Fuel: 200 gal total / 194 gal usable</b></p><p>Front seats: FS 75–82. Rear seats: FS 115–120. No 5th/6th seats in Seneca Barons.</p><p>Landing fuel uses the POH variable-arm usable-fuel table.</p></div>`:C172_LIMIT_COLUMNS_MARKUP;const legend=document.querySelector('#wbModule .legend');if(legend)legend.style.display=isBaron()?'none':'';const limitGrid=document.querySelector('#wbModule .limit-grid');if(limitGrid&&!isBaron())limitGrid.innerHTML=C172_LIMIT_GRID_MARKUP;renderLoadingInputs()}
+function calcBaron(){const a=aircraft(),pic=n('picWeight'),frontP=n('frontPassenger'),rear1=n('rear1'),rear2=n('rear2'),nose=n('bag1'),rearBag=n('bag2'),aftBag=n('bag3'),fuel=n('fuel'),dest=n('fuelDest');const picArm=baronArm('picArm',BARON_FRONT_DEFAULT_ARM),frontPassengerArm=baronArm('frontPassengerArm',BARON_FRONT_DEFAULT_ARM),rear1Arm=baronArm('rear1Arm',BARON_REAR_DEFAULT_ARM),rear2Arm=baronArm('rear2Arm',BARON_REAR_DEFAULT_ARM),noseArm=baronArm('bag1Arm',BARON_NOSE_DEFAULT_ARM),rearBagArm=baronArm('bag2Arm',BARON_REAR_BAG_ARM),aftBagArm=baronArm('bag3Arm',BARON_AFT_BAG_ARM);const items=[['PIC',pic,pic*picArm],['Front Passenger',frontP,frontP*frontPassengerArm],['Rear Passenger 1',rear1,rear1*rear1Arm],['Rear Passenger 2',rear2,rear2*rear2Arm],['Nose Baggage',nose,nose*noseArm],['Rear Baggage',rearBag,rearBag*rearBagArm],['Aft Baggage',aftBag,aftBag*aftBagArm]];const z=baronCond(items.reduce((s,x)=>s+x[1],0)+a.empty,items.reduce((s,x)=>s+x[2],0)+a.moment);const fuelW=baronFuelWeight(fuel),fuelM=baronFuelMoment(fuel)*100,ramp=baronCond(z.weight+fuelW,z.moment+fuelM);const take=baronCond(ramp.weight-BARON_LIM.taxiLb,ramp.moment-BARON_LIM.taxiMoment100*100);const remainingGal=Math.max(0,Math.min(BARON_LIM.usableFuel,dest)),remainingW=baronFuelWeight(remainingGal),remainingM=baronFuelMoment(remainingGal)*100,land=baronCond(z.weight+remainingW,z.moment+remainingM);renderAircraftBaronAware(a);renderBaronPaper(items,z,ramp,take,land,fuel,fuelW,fuelM,dest,remainingGal,remainingW,remainingM);renderBaronEnvelope({z,ramp,take,land});renderPerformance();renderPaperwork();saveDraftBaron();const banner=document.querySelector('#wbModule .paper-note');if(banner&&dest>fuel)banner.innerHTML='<b style="color:#ff7777">⚠ Fuel at destination exceeds fuel loaded.</b> Enter destination fuel remaining at or below the loaded fuel.'}
+
+function calc(){if(isBaron())calcBaron();else calcC172Legacy()}
+function baronRow(label,w,m,c='',cls=''){return `<tr class="${cls}"><td class="item">${label}</td><td>${fmt(w,2)}</td><td>${fmt(m/1000,3)}</td><td class="cg">${c===''?'':fmt(c,2)+'"'}</td></tr>`}
+function baronConditionRow(label,p,kind){const limit=kind==='ramp'?BARON_LIM.ramp:kind==='takeoff'?BARON_LIM.takeoff:kind==='landing'?BARON_LIM.landing:null,l=baronLimits(p.weight),weightOK=limit===null||p.weight<=limit,cgOK=baronInside(p),ok=weightOK&&cgOK;let detail='';if(!weightOK)detail=`Weight ${fmt(p.weight,1)} lb exceeds ${fmt(limit,0)} lb limit.`;else if(l)detail=`CG limit ${fmt(l.forward,2)}–${fmt(l.aft,1)} in • Fwd ${fmt(p.cg-l.forward,2)}" / Aft ${fmt(l.aft-p.cg,2)}" margin`;else detail='Weight is outside the published CG-envelope range.';return `<tr class="total condition"><td class="item">${label}<span class="condition-badge ${ok?'good':'bad'}">${ok?'WITHIN LIMITS':'OUTSIDE LIMITS'}</span><span class="condition-meta ${ok?'good':'bad'}">${detail}</span></td><td>${fmt(p.weight,2)}</td><td>${fmt(p.moment/1000,3)}</td><td class="cg">${fmt(p.cg,2)}"</td></tr>`}
+function renderBaronPaper(items,z,ramp,take,land,fuel,fuelW,fuelM,dest,remainingGal,remainingW,remainingM){let html=items.map(x=>baronRow(`${x[0]} <span class=\"condition-meta\">Arm ${fmt(x[1] ? x[2]/x[1] : 0,1)} in</span>`,x[1],x[2],'','input-row')).join('');html+=baronConditionRow('ZERO FUEL CONDITION',z,'zfw');html+=baronRow(`Fuel Loading (${fmt(fuel,1)} US Gal)`,fuelW,fuelM);html+=baronConditionRow('RAMP CONDITION',ramp,'ramp');html+=baronRow('Fuel for Start, Taxi, and Run Up (24 lb)',-BARON_LIM.taxiLb,-BARON_LIM.taxiMoment100*100,'','negative input-row');html+=baronConditionRow('TAKE-OFF CONDITION',take,'takeoff');html+=baronRow(`Fuel at Dest. (${fmt(dest,1)} US Gal)`,remainingW,remainingM,'','fuel input-row');html+=baronConditionRow('LANDING CONDITION',land,'landing');$('paperBody').innerHTML=html;const lg=document.querySelector('.limit-grid');if(lg)lg.innerHTML=`<div class="limit-card"><h3>Aircraft Limitations</h3><ul class="limit-list"><li><span>Maximum Ramp Weight</span><b>5,524 lb</b></li><li><span>Maximum Takeoff Weight</span><b>5,500 lb</b></li><li><span>Maximum Landing Weight</span><b>5,400 lb</b></li><li><span>Usable Fuel</span><b>194 gal / 1,164 lb</b></li></ul></div><div class="limit-card"><h3>Baron W&amp;B Reference</h3><ul class="limit-list"><li><span>Forward CG</span><b>74.0–78.3 in</b></li><li><span>Aft CG</span><b>86.0 in</b></li><li><span>Front Seats</span><b>FS 75–82</b></li><li><span>Rear Seats</span><b>FS 115–120</b></li></ul></div>`}
+function renderBaronEnvelope(s){lastEnvelopeState=s;const svg=$('envelopeSvg'),wrap=svg?.parentElement,tooltip=$('chartTooltip');if(!svg||!wrap)return;const W=760,H=600,L=72,R=25,T=28,B=62,iw=W-L-R,ih=H-T-B,baseX=[72,88],baseY=[3500,5600];let xSpan=(baseX[1]-baseX[0])/chartZoom,ySpan=(baseY[1]-baseY[0])/chartZoom;const fx=chartFocusX??80,fy=chartFocusY??4450,xMin=Math.max(baseX[0],Math.min(baseX[1]-xSpan,fx-xSpan/2)),xMax=xMin+xSpan,yMin=Math.max(baseY[0],Math.min(baseY[1]-ySpan,fy-ySpan/2)),yMax=yMin+ySpan,X=x=>L+(x-xMin)/(xMax-xMin)*iw,Y=y=>T+(yMax-y)/(yMax-yMin)*ih,clamp=(v,a,b)=>Math.max(a,Math.min(b,v));const boundary=[[74,3600],[74,4200],[78,5400],[78.3,5500],[86,5500],[86,3600]],poly=p=>p.map(q=>`${X(q[0]).toFixed(1)},${Y(q[1]).toFixed(1)}`).join(' ');let out=`<rect width="${W}" height="${H}" fill="#071a2a"/><g stroke="#254055" stroke-width="1">`;const xStep=chartZoom>=2?1:2,yStep=chartZoom>=2?100:200;for(let c=Math.ceil(xMin/xStep)*xStep;c<=xMax+1e-9;c+=xStep)out+=`<line x1="${X(c)}" y1="${T}" x2="${X(c)}" y2="${T+ih}"/>`;for(let w=Math.ceil(yMin/yStep)*yStep;w<=yMax+1e-9;w+=yStep)out+=`<line x1="${L}" y1="${Y(w)}" x2="${L+iw}" y2="${Y(w)}"/>`;out+=`</g><polygon points="${poly(boundary)}" fill="#43c6e8" fill-opacity=".09" stroke="#43c6e8" stroke-width="3"/><g fill="none" stroke="#55e15d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M ${X(74)} ${Y(3600)} L ${X(74)} ${Y(4200)} L ${X(78)} ${Y(5400)} L ${X(78.3)} ${Y(5500)} L ${X(86)} ${Y(5500)} L ${X(86)} ${Y(3600)}"/></g>`;[[74,3600],[74,4200],[78,5400],[78.3,5500],[86,5500]].forEach(([cg,w])=>{if(cg>=xMin&&cg<=xMax&&w>=yMin&&w<=yMax)out+=`<circle cx="${X(cg)}" cy="${Y(w)}" r="4" fill="#071a2a" stroke="#dff7ff" stroke-width="2"/>`});out+=`<text x="${X(76)}" y="${Y(5000)}" fill="#70e86a" font-size="16" font-weight="800" text-anchor="middle">BE58 CG ENVELOPE</text><g fill="#9eb0c2" font-size="12" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">`;for(let c=Math.ceil(xMin/xStep)*xStep;c<=xMax+1e-9;c+=xStep)out+=`<text x="${X(c)}" y="${H-34}" text-anchor="middle">${Number(c).toFixed(c%1?1:0)}</text>`;for(let w=Math.ceil(yMin/yStep)*yStep;w<=yMax+1e-9;w+=yStep)out+=`<text x="${L-10}" y="${Y(w)+4}" text-anchor="end">${fmt(w)}</text>`;out+=`<text x="${L+iw/2}" y="${H-10}" text-anchor="middle">C.G. location (inches aft of datum)</text><text transform="translate(18 ${T+ih/2}) rotate(-90)" text-anchor="middle">Loaded airplane weight (lb)</text></g>`;const pts=[['Zero Fuel',s.z,'#1689ff'],['Ramp',s.ramp,'#67e35d'],['Takeoff',s.take,'#ff5b5b'],['Landing',s.land,'#c07cff']];pts.forEach(([name,p,color])=>{if(!p?.weight)return;const cx=clamp(p.cg,xMin,xMax),cy=clamp(p.weight,yMin,yMax),outx=p.cg<xMin||p.cg>xMax,outy=p.weight<yMin||p.weight>yMax,l=baronLimits(p.weight),ok=baronInside(p),marker=`<g class="chart-point" tabindex="0" data-name="${name}" data-weight="${p.weight}" data-cg="${p.cg}" data-limit="${l?fmt(l.forward,2)+'–'+fmt(l.aft,1):'N/A'}" data-ok="${ok}">`;out+=marker+(outx||outy?`<path d="M ${X(cx)-8} ${Y(cy)+8} L ${X(cx)} ${Y(cy)-9} L ${X(cx)+8} ${Y(cy)+8} Z" fill="${color}" stroke="#fff" stroke-width="2"/>`:`<circle cx="${X(cx)}" cy="${Y(cy)}" r="7" fill="${color}" stroke="#fff" stroke-width="2"/>`)+`</g>`});svg.innerHTML=out;const showPoint=el=>{const name=el.dataset.name,weight=Number(el.dataset.weight),cg=Number(el.dataset.cg),lim=el.dataset.limit,ok=el.dataset.ok==='true';tooltip.innerHTML=`<strong>${name}</strong><span>Weight: ${fmt(weight,1)} lb<br>C.G.: ${fmt(cg,2)} in<br>Allowable: ${lim==='N/A'?'Outside published weight range':lim+' in'}<br>${ok?'✓ Within CG limits':'✕ Outside CG limits'}</span>`;const box=wrap.getBoundingClientRect(),r=el.getBoundingClientRect();let left=r.left-box.left+r.width+10,top=r.top-box.top-10;if(left+185>box.width)left=r.left-box.left-195;if(top<8)top=8;if(top+100>box.height)top=Math.max(8,box.height-108);tooltip.style.left=`${left}px`;tooltip.style.top=`${top}px`;tooltip.classList.add('show')};svg.querySelectorAll('.chart-point').forEach(el=>{el.addEventListener('mouseenter',()=>showPoint(el));el.addEventListener('mouseleave',()=>tooltip.classList.remove('show'));el.addEventListener('focus',()=>showPoint(el));el.addEventListener('blur',()=>tooltip.classList.remove('show'));el.addEventListener('click',e=>{e.stopPropagation();showPoint(el)})});wrap.onclick=()=>tooltip.classList.remove('show');const ok=baronInside(s.take)&&s.take.weight<=BARON_LIM.takeoff,l=baronLimits(s.take.weight),ns=$('normalStatus'),us=$('utilityStatus');if(ns){ns.className='status '+(ok?'good':'bad');ns.innerHTML=ok&&l?`<h3>✓ WITHIN BARON LIMITS</h3><p>Takeoff: ${fmt(s.take.weight,1)} lb • CG ${fmt(s.take.cg,2)} in. Allowable at this weight: ${fmt(l.forward,2)}–86.0 in.</p>`:`<h3>✕ OUTSIDE BARON LIMITS</h3><p>Takeoff: ${fmt(s.take.weight,1)} lb • CG ${fmt(s.take.cg,2)} in.</p>`}if(us){us.className='status warn';us.innerHTML=`<h3>BARON CG REFERENCE</h3><p>Forward: 74.0 in at 3,600–4,200 lb, then 78.0 in at 5,400 lb and 78.3 in at 5,500 lb. Aft: 86.0 in.</p>`}}
+let performanceBaronActive=false;
+let c172PerformanceTemplate=null;
+let c172PerformanceValues={};
+const C172_PERF_VALUE_IDS=['toElevation','toRunwayHeading','toWindVelocity','toAltimeter','toTORA','toTODA','toTemp','ldElevation','ldRunwayHeading','ldWindVelocity','ldAltimeter','ldLDA','ldTemp','ldSurface','toSurface','minFuel'];
+function captureC172PerformanceTemplate(){
+ const m=$('perfModule');
+ if(!m)return;
+ if(!c172PerformanceTemplate){c172PerformanceTemplate={html:m.innerHTML};}
+ C172_PERF_VALUE_IDS.forEach(id=>{const el=$(id);if(el)c172PerformanceValues[id]=el.value});
+}
+function restoreC172PerformanceUI(){
+ const m=$('perfModule');
+ if(!m||!c172PerformanceTemplate)return;
+ m.innerHTML=c172PerformanceTemplate.html;
+ C172_PERF_VALUE_IDS.forEach(id=>{const el=$(id);if(el&&Object.prototype.hasOwnProperty.call(c172PerformanceValues,id))el.value=c172PerformanceValues[id]});
+ ['toElevation','toRunwayHeading','toWindVelocity','toAltimeter','toTORA','toTODA','toTemp','toSurface','ldElevation','ldRunwayHeading','ldWindVelocity','ldAltimeter','ldLDA','ldTemp','ldSurface','minFuel'].forEach(id=>{const el=$(id);if(el){el.addEventListener('input',()=>performanceCalc(id.startsWith('to')?'takeoff':'landing'));el.addEventListener('change',()=>performanceCalc(id.startsWith('to')?'takeoff':'landing'))}});
+ performanceBaronActive=false;
+}
+function baronPerfState(){try{return JSON.parse(localStorage.getItem('senecaBaronPerfV02')||localStorage.getItem('senecaBaronPerfV01')||'{}')}catch(e){return{}}}
+function saveBaronPerfState(){const ids=['toElevation','toRunwayHeading','toWindVelocity','toAltimeter','toTORA','toTODA','toASDA','toTemp','ldElevation','ldRunwayHeading','ldWindVelocity','ldAltimeter','ldLDA','ldTemp','baronToMaxSafe','baronToAccelStop','baronToAccelGo','baronToGround','baronToGradient','baronToSEROC','baronToDistance','baronToVx','baronToV50','baronImVref','baronImGround','baronImDistance','baronLdVref','baronLdGround','baronLdDistance','baronFlightAlt','baronTimeClimb','baronFuelClimb','baronDistClimb','baronSECeiling','baronTwoEngineROC','baronCruiseFuelFlow','baronPowerMode','baronMPRPM','baronKTAS','baronKIAS','baronFlightTime','baronMinFuel'];const d={};ids.forEach(id=>{const el=$(id);if(el)d[id]=el.value});localStorage.setItem('senecaBaronPerfV02',JSON.stringify(d))}
+function loadBaronPerfState(){const d=baronPerfState();Object.entries(d).forEach(([k,v])=>{if($(k))$(k).value=v})}
+function baronPerfConditions(prefix){const elevation=Number($(prefix+'Elevation')?.value),altimeter=Number($(prefix+'Altimeter')?.value),temp=Number($(prefix+'Temp')?.value);const pa=(Number.isFinite(elevation)&&Number.isFinite(altimeter)&&altimeter>=28&&altimeter<=31)?elevation+(29.92-altimeter)*1000:null;const isa=Number.isFinite(pa)?15-1.98*(pa/1000):null;const da=(Number.isFinite(pa)&&Number.isFinite(temp))?pa+120*(temp-isa):null;const rw=runwayHeading($(prefix+'RunwayHeading')?.value);const wind=parseWind($(prefix+'WindVelocity')?.value);let hwc=null,xwc=null;if(rw!==null&&wind){const a=(wind.dir-rw)*Math.PI/180;hwc=wind.speed*Math.cos(a);xwc=Math.abs(wind.speed*Math.sin(a))}return{elevation,altimeter,temp,pa,da,rw,wind,hwc,xwc}}
+function baronPerfSet(id,v){const el=$(id);if(el)el.value=v??''}
+const BARON_OUTPUT_IDS=['baronToMaxSafe','baronToAccelStop','baronToAccelGo','baronToGround','baronToGradient','baronToSEROC','baronToDistance','baronToVx','baronToV50','baronImVref','baronImGround','baronImDistance','baronLdVref','baronLdGround','baronLdDistance','baronSECeiling'];
+function clearBaronLookupOutputs(){BARON_OUTPUT_IDS.forEach(id=>baronPerfSet(id,''));}
+function setBaronLookupStatus(kind,text,detail=''){const el=$(kind);if(el){el.innerHTML=`<b>${esc(text)}</b>${detail?`<span>${esc(detail)}</span>`:''}`;el.className='baron-lookup-status '+(text.includes('Validated')?'validated':text.includes('Required')?'required':text.includes('Digitized')?'estimated':'neutral')}}
+/* Baron POH chart-digitized approximation engine.
+   The POH uses chained nomograms rather than closed-form equations. These
+   surfaces are a hand-digitized approximation of the published curve families,
+   calibrated to the POH worked examples and published sea-level reference data.
+   Values outside the chart envelope are clamped and marked as estimates. */
+const BARON_DIGITIZED={
+ G58:{toMax:5500,ldMax:5400,seaTo:{ground:1373,total:2300},seaLd:{ground:1440,total:2490},
+   toExample:{pa:5653,temp:15,weight:5500,hwc:10,ground:2200,total:3775},
+   goExample:{pa:5653,temp:15,weight:4700,hwc:10,ground:3760,total:9400,gradient:2.6},
+   stopExample:{pa:5653,temp:15,weight:5500,hwc:10,total:3960},
+   ldExample:{pa:3965,temp:25,weight:5039,hwc:9.5,ground:1450,total:2500,vref:91},
+   gradientExample:{pa:5653,temp:15,weight:4700,gradient:2.6}},
+ B58:{toMax:5400,ldMax:5400,seaTo:{ground:1373,total:2300},seaLd:{ground:1440,total:2490},
+   toExample:{pa:5650,temp:15,weight:5400,hwc:9.5,ground:1900,total:3090},
+   goExample:{pa:5650,temp:15,weight:4850,hwc:9.5,ground:1775,total:8071,gradient:2.1},
+   stopExample:{pa:5650,temp:15,weight:5400,hwc:9.5,total:3960},
+   ldExample:{pa:3965,temp:25,weight:5039,hwc:9.5,ground:1450,total:2500,vref:91},
+   gradientExample:{pa:5650,temp:15,weight:4850,gradient:2.1}}
+};
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function baronModelKey(){return aircraft().type.includes('G1000')?'G58':'B58'}
+function baronNorm(x,a,b){return clamp((x-a)/(b-a),0,1)}
+function baronDAFactor(pa,temp,refPA=0){const isa=15-1.98*(pa/1000);const da=pa+120*(temp-isa);return {da,isa}}
+function baronCurveFactor(value,refValue,altCoeff,exp=1.08){const r=Math.max(0,value)/1000, rr=Math.max(0,refValue)/1000;return Math.pow(Math.max(.35,1+altCoeff*r)/Math.max(.35,1+altCoeff*rr),exp)}
+function baronWindFactor(hwc,coeff=.011){return clamp(1-hwc*coeff,.72,1.45)}
+function baronTempWeightBase(model,kind,pa,temp,weight){
+ const d=baronDAFactor(pa,temp).da;
+ const M=BARON_DIGITIZED[model];
+ const sea=M[kind==='landing'?'seaLd':'seaTo'];
+ const maxW=kind==='landing'?M.ldMax:M.toMax;
+ // Curve families in the POH increase strongly with pressure altitude / hot OAT,
+ // and moderately with weight. The exponents were selected by tracing the chart
+ // families, then anchored to the published worked examples.
+ const altCoeff=kind==='landing'?.000060:(model==='G58'?.000095:.000050);
+ const alt=Math.pow(Math.max(.40,1+altCoeff*d),1.05);
+ const wt=Math.pow(clamp(weight/maxW,.72,1.02),kind==='landing'?1.55:1.75);
+ return {d,alt,wt,sea};
+}
+function baronScaleToExample(raw, ex, rawEx){return raw*(ex/rawEx)}
+function baronDigitizedTakeoff(model,pa,temp,weight,hwc){
+ const M=BARON_DIGITIZED[model], p=baronTempWeightBase(model,'takeoff',pa,temp,weight);
+ let ground=p.sea.ground*p.alt*p.wt*baronWindFactor(hwc);
+ let total=p.sea.total*p.alt*Math.pow(p.wt,.92)*baronWindFactor(hwc*.78);
+ // Exact POH worked-example anchor. Preserve chart shape while forcing the
+ // calibration point to the printed value.
+ const ex=M.toExample, pe=baronTempWeightBase(model,'takeoff',ex.pa,ex.temp,ex.weight);
+ const rawG=pe.sea.ground*pe.alt*pe.wt*baronWindFactor(ex.hwc);
+ const rawT=pe.sea.total*pe.alt*Math.pow(pe.wt,.92)*baronWindFactor(ex.hwc*.78);
+ ground*=ex.ground/rawG; total*=ex.total/rawT;
+ const vLift=model==='G58'?85:86, v50=model==='G58'?100:94;
+ return {ground:Math.round(ground/5)*5,total:Math.round(total/5)*5,vLift,v50,da:p.d,estimated:true};
+}
+function baronDigitizedLanding(model,pa,temp,weight,hwc){
+ const M=BARON_DIGITIZED[model], p=baronTempWeightBase(model,'landing',pa,temp,weight);
+ let ground=p.sea.ground*p.alt*p.wt*baronWindFactor(hwc*.92);
+ let total=p.sea.total*p.alt*Math.pow(p.wt,.72)*baronWindFactor(hwc*.70);
+ const ex=M.ldExample, pe=baronTempWeightBase(model,'landing',ex.pa,ex.temp,ex.weight);
+ const rawG=pe.sea.ground*pe.alt*pe.wt*baronWindFactor(ex.hwc*.92);
+ const rawT=pe.sea.total*pe.alt*Math.pow(pe.wt,.72)*baronWindFactor(ex.hwc*.70);
+ ground*=ex.ground/rawG; total*=ex.total/rawT;
+ const pts=model==='G58'?[[4000,81],[4600,87],[5000,91],[5400,95]]:[[4000,81],[4600,87],[5000,91],[5400,96]];let vref=pts[0][1];for(let i=1;i<pts.length;i++){if(weight<=pts[i][0]){const [w0,v0]=pts[i-1],[w1,v1]=pts[i];vref=Math.round(v0+(weight-w0)*(v1-v0)/(w1-w0));break}}if(weight>=pts[pts.length-1][0])vref=pts[pts.length-1][1];
+ return {ground:Math.round(ground/5)*5,total:Math.round(total/5)*5,vref,da:p.d,estimated:true};
+}
+function baronDigitizedTakeoffWeight(model,pa,temp){
+ const M=BARON_DIGITIZED[model], ex=model==='G58'?4870:4850, max=M.toMax;
+ const isa=15-1.98*(pa/1000), da=Math.max(0,pa+120*(temp-isa));
+ const exDa=baronDAFactor(model==='G58'?5653:5650,15).da;
+ const penalty=(max-ex)*Math.pow(clamp(da/exDa,0,2),1.06);
+ return clamp(Math.round((max-penalty)/10)*10,4000,max);
+}
+function baronDigitizedGradient(model,pa,temp,weight){
+ const M=BARON_DIGITIZED[model], ex=M.gradientExample;
+ const d=baronDAFactor(pa,temp).da, de=baronDAFactor(ex.pa,ex.temp).da;
+ const weightFactor=Math.pow(clamp(ex.weight/Math.max(weight,1),.75,1.4),1.65);
+ const altitudeFactor=Math.pow(Math.max(.35,(1+d/12000)/(1+de/12000)),-1.25);
+ return clamp(ex.gradient*weightFactor*altitudeFactor,.2,8);
+}
+function baronDigitizedAccelStop(model,pa,temp,weight,hwc){
+ const M=BARON_DIGITIZED[model], ex=M.stopExample;
+ const d=baronDAFactor(pa,temp).da, de=baronDAFactor(ex.pa,ex.temp).da;
+ const wf=Math.pow(clamp(weight/ex.weight,.75,1.03),1.85);
+ const af=Math.pow(Math.max(.35,(1+d/9000)/(1+de/9000)),1.15);
+ const wind=baronWindFactor(hwc,.009);
+ const raw=ex.total*wf*af*wind;
+ const rawEx=ex.total*1*1*baronWindFactor(ex.hwc,.009);
+ return Math.round((raw*(ex.total/rawEx))/5)*5;
+}
+function baronDigitizedAccelGo(model,pa,temp,weight,hwc){
+ const M=BARON_DIGITIZED[model], ex=M.goExample;
+ const d=baronDAFactor(pa,temp).da, de=baronDAFactor(ex.pa,ex.temp).da;
+ const wf=Math.pow(clamp(weight/ex.weight,.72,1.03),2.1);
+ const af=Math.pow(Math.max(.30,(1+d/7000)/(1+de/7000)),1.25);
+ const wind=baronWindFactor(hwc,.006);
+ const rawTotal=ex.total*wf*af*wind;
+ const rawGround=ex.ground*Math.pow(clamp(weight/ex.weight,.72,1.03),1.75)*Math.pow(Math.max(.35,(1+d/9000)/(1+de/9000)),.85)*baronWindFactor(hwc,.009);
+ const rawTotalEx=ex.total*1*1*baronWindFactor(ex.hwc,.006);
+ const rawGroundEx=ex.ground*1*1*baronWindFactor(ex.hwc,.009);
+ return {total:Math.round(rawTotal*(ex.total/rawTotalEx)),ground:Math.round(rawGround*(ex.ground/rawGroundEx))};
+}
+function baronDigitizedServiceCeiling(model,temp,weight){
+ // Service-ceiling chart estimate, anchored to the published G58 example.
+ const base=model==='G58'?12015:12015;
+ const exW=4700;
+ return Math.round(clamp(base + (-20-temp)*70 - (weight-exW)*2.0,3000,16000)/5)*5;
+}
+const BARON_CRUISE_ALT=[0,2000,4000,6000,8000,10000,12000,14000,16000];
+/* POH cruise-power tables, digitized from the B58/G58 Section 5 tables.
+   The published tables use ISA-20, ISA and ISA+20 bands; values between bands
+   are linearly interpolated. MP is the approximate full-throttle value shown
+   by the POH, while RPM is the selected table setting. */
+const BARON_CRUISE_TABLES={
+ '25R2500':{
+  rpm:2500, label:'25 in Hg / 2500 RPM — Rich',
+  bands:{'-20':{mp:[25,25,25,24,22,21,19,18,16],ff:[16.8,17.5,18.2,17.5,16.3,15.3,14.3,13.3,12.3],kias:[194,195,196,191,184,177,169,162,154],ktas:[187,193,199,200,198,196,194,191,187]},
+         '0':{mp:[25,25,25,24,22,21,19,18,16],ff:[16.3,16.8,17.5,17.0,15.8,14.8,13.8,12.8,12.0],kias:[189,190,191,186,179,171,162,156,148],ktas:[188,195,201,202,200,198,195,192,188]},
+         '20':{mp:[25,25,25,24,22,21,19,18,16],ff:[15.8,16.3,16.8,16.3,15.3,14.3,13.3,12.5,11.7],kias:[184,185,185,181,173,166,159,151,143],ktas:[190,196,202,203,201,199,196,193,188]}}},
+ '25L2500':{
+  rpm:2500, label:'25 in Hg / 2500 RPM — Lean',
+  bands:{'-20':{mp:[25,25,25,24,22,21,19,18,16],ff:[14.5,15.2,15.7,15.2,14.0,13.0,12.0,11.2,10.3],kias:[189,191,191,186,179,172,164,157,149],ktas:[182,188,194,195,193,191,188,185,181]},
+         '0':{mp:[25,25,25,24,22,21,19,18,16],ff:[14.0,14.5,15.2,14.7,13.5,12.5,11.7,10.8,10.0],kias:[184,185,186,181,174,167,159,152,143],ktas:[184,190,196,197,195,193,190,186,182]},
+         '20':{mp:[25,25,25,24,22,21,19,18,16],ff:[13.5,14.0,14.5,14.0,13.0,12.0,11.2,10.3,9.7],kias:[179,180,181,176,169,161,154,146,138],ktas:[185,191,197,198,196,192,190,187,182]}}},
+ '23R2300':{
+  rpm:2300, label:'23 in Hg / 2300 RPM — Rich',
+  bands:{'-20':{mp:[23,23,23,23,22,21,19,18,17],ff:[13.5,14.0,14.5,15.2,14.8,14.0,13.0,12.2,11.3],kias:[176,178,179,180,177,169,162,154,146],ktas:[170,176,182,188,190,188,185,182,178]},
+         '0':{mp:[23,23,23,23,22,21,19,18,17],ff:[13.0,13.5,14.2,14.7,14.5,13.5,12.7,11.8,11.0],kias:[171,173,174,175,171,164,156,149,140],ktas:[171,177,183,190,192,189,186,183,178]},
+         '20':{mp:[23,23,23,23,22,21,19,18,17],ff:[12.7,13.2,13.7,14.2,14.0,13.0,12.2,11.3,10.7],kias:[166,168,169,169,166,159,151,143,135],ktas:[171,178,184,191,193,190,187,182,178]}}},
+ '23L2300':{
+  rpm:2300, label:'23 in Hg / 2300 RPM — Lean',
+  bands:{'-20':{mp:[23,23,23,23,22,21,19,18,17],ff:[11.2,11.7,12.2,12.7,12.5,11.5,10.7,10.0,9.3],kias:[171,172,173,174,171,164,156,149,140],ktas:[164,170,176,182,184,182,179,176,171]},
+         '0':{mp:[23,23,23,23,22,21,19,18,17],ff:[10.7,11.2,11.7,12.2,12.0,11.2,10.3,9.7,9.0],kias:[166,167,168,169,166,158,151,143,135],ktas:[165,171,177,184,185,183,180,176,171]},
+         '20':{mp:[23,23,23,23,22,21,19,18,17],ff:[10.3,10.8,11.3,11.7,11.5,10.7,10.0,9.3,8.7],kias:[161,162,163,164,160,153,145,137,128],ktas:[166,172,178,184,186,182,180,175,169]}}}
+};
+function baronInterpArray(x,xs,ys){if(x<=xs[0])return ys[0];if(x>=xs[xs.length-1])return ys[ys.length-1];for(let i=1;i<xs.length;i++){if(x<=xs[i]){const t=(x-xs[i-1])/(xs[i]-xs[i-1]);return ys[i-1]+t*(ys[i]-ys[i-1]);}}return ys[ys.length-1]}
+function baronCruiseLookup(model,pa,temp,mode){
+ const key=mode||'25R2500', tab=BARON_CRUISE_TABLES[key]||BARON_CRUISE_TABLES['25R2500'];
+ const isa=15-1.98*(pa/1000), dev=temp-isa, bands=[-20,0,20];
+ const atBand=b=>{const z=tab.bands[String(b)];return {mp:baronInterpArray(pa,BARON_CRUISE_ALT,z.mp),ff:baronInterpArray(pa,BARON_CRUISE_ALT,z.ff),kias:baronInterpArray(pa,BARON_CRUISE_ALT,z.kias),ktas:baronInterpArray(pa,BARON_CRUISE_ALT,z.ktas)}};
+ const d=clamp(dev,-20,20);let lo=-20,hi=0;if(d>0){lo=0;hi=20}const a=atBand(lo),b=atBand(hi),t=(d-lo)/(hi-lo);return {rpm:tab.rpm,mp:a.mp+(b.mp-a.mp)*t,ff:a.ff+(b.ff-a.ff)*t,kias:a.kias+(b.kias-a.kias)*t,ktas:a.ktas+(b.ktas-a.ktas)*t,isa,dev,estimated:true,label:tab.label};
+}
+/* Approximate digitization of the CLIMB — TWO ENGINE chart. The POH example
+   is 800 fpm at -5°C / 11,500 ft / 5,500 lb; the table below traces the visible
+   curve family and is interpolated by density altitude and weight. */
+const BARON_2ENG_ROC={
+  4000:[2550,2400,2250,2100],
+  8000:[1950,1800,1650,1500],
+  11500:[1150,1000,900,800],
+  14000:[750,650,550,450],
+  16000:[500,425,350,275]
+};
+function baronDigitizedTwoEngineROC(model,pa,temp,weight){
+ const da=baronDAFactor(pa,temp).da, alts=Object.keys(BARON_2ENG_ROC).map(Number), ws=[4000,4500,5000,5500];
+ const col=[];for(let j=0;j<4;j++)col.push(baronInterpArray(clamp(da,alts[0],alts[alts.length-1]),alts,alts.map(a=>BARON_2ENG_ROC[a][j])));
+ return Math.round(clamp(baronInterpArray(clamp(weight,4000,5500),ws,col),0,3200)/5)*5;
+}
+function baronDigitizedCruise(model,pa,temp,weight){
+ const mode=$('baronPowerMode')?.value||'25R2500';const r=baronCruiseLookup(model,pa,temp,mode);return r;
+}
+function baronDigitizedSEROC(model,pa,temp,weight){
+ // Digitized estimate from the POH CLIMB — ONE ENGINE INOPERATIVE nomogram.
+ // Both the B58 and G58 chart images carry the published 10°C / 4000 ft / 4700 lb
+ // calibration point: 405 fpm and 3.5% gradient. The altitude trend is also
+ // anchored to the G58 service-ceiling example (50 fpm at 12,015 ft, 4700 lb).
+ const da=baronDAFactor(pa,temp).da;
+ const refDA=baronDAFactor(4000,10).da;
+ // Linearized trace between the 405 fpm chart calibration and the
+ // high-altitude/service-ceiling portion of the same curve family.
+ const altitudeEffect=(refDA-da)*0.055;
+ const weightEffect=(weight-4700)*0.20;
+ return Math.round(clamp(405+altitudeEffect-weightEffect,-100,1000));
+}
+function baronDigitizedFlightClimb(model,targetPA,startPA,temp,weight){
+ // The POH Time/Fuel/Distance-to-Cruise-Climb nomogram is cumulative from SL.
+ // Published calibration for both B58/G58: 15°C takeoff, 5653 ft, 5500 lb ->
+ // 5 min / 3.9 gal / 11.5 NM; and the worked continuation to 11,500 ft at
+ // -5°C -> 13 min / 9.5 gal / 32 NM. Intermediate values are chart estimates.
+ if(!Number.isFinite(targetPA)||targetPA<=startPA)return null;
+ const cum=(alt,temp,w)=>{
+   const a=Math.max(0,alt);
+   const r=Math.max(.05,a/5653);
+   const wf=Math.pow(clamp(w/5500,.75,1.02),.85);
+   const tempShape=Math.max(.82,1+0.0035*(15-temp)*Math.pow(r,1.15));
+   const time=5*Math.pow(r,1.25)*wf*tempShape;
+   const fuel=3.9*Math.pow(r,1.25)*Math.pow(w/5500,.70)*Math.max(.86,1+0.001*(15-temp)*Math.pow(r,1.1));
+   const dist=11.5*Math.pow(r,1.45)*Math.pow(w/5500,.25);
+   return {time,fuel,dist};
+ };
+ const end=cum(targetPA,temp,weight), start=cum(startPA,temp,weight);
+ return {time:Math.max(0,end.time-start.time),fuel:Math.max(0,end.fuel-start.fuel),dist:Math.max(0,end.dist-start.dist),estimated:true};
+}
+function baronDigitizedPerfAutofill(){
+ const model=baronModelKey(),to=baronPerfConditions('to'),ld=baronPerfConditions('ld');
+ const tW=lastEnvelopeState?.take?.weight||0,lW=lastEnvelopeState?.land?.weight||0;
+ clearBaronLookupOutputs();
+ let any=false, exact=false;
+ const validPA=(x)=>Number.isFinite(x)&&x>=0&&x<=12000, validT=(x)=>Number.isFinite(x)&&x>=-40&&x<=50;
+ if(validPA(to.pa)&&validT(to.temp)&&tW>0&&tW<=BARON_DIGITIZED[model].toMax){
+   const toD=baronDigitizedTakeoff(model,to.pa,to.temp,tW,Number.isFinite(to.hwc)?to.hwc:0);
+   const stop=baronDigitizedAccelStop(model,to.pa,to.temp,tW,Number.isFinite(to.hwc)?to.hwc:0);
+   const go=baronDigitizedAccelGo(model,to.pa,to.temp,tW,Number.isFinite(to.hwc)?to.hwc:0);
+   const grad=baronDigitizedGradient(model,to.pa,to.temp,tW);
+   const seroc=baronDigitizedSEROC(model,to.pa,to.temp,tW);
+   const twoRoc=baronDigitizedTwoEngineROC(model,to.pa,to.temp,tW);
+   const maxSafe=baronDigitizedTakeoffWeight(model,to.pa,to.temp);
+   Object.entries({baronToMaxSafe:Math.round(maxSafe),baronToAccelStop:stop,baronToAccelGo:go.total,baronToGround:toD.ground,baronToGradient:grad.toFixed(1),baronToSEROC:seroc,baronTwoEngineROC:twoRoc,baronToDistance:toD.total,baronToVx:toD.vLift,baronToV50:toD.v50}).forEach(([k,v])=>baronPerfSet(k,v));
+   // Flight-planning fields: target altitude is user-entered; climb outputs are
+   // estimated from the applicable Time/Fuel/Distance-to-Cruise-Climb nomogram.
+   const cruise=baronDigitizedCruise(model,to.pa,to.temp,tW);
+   baronPerfSet('baronPowerMode',$('baronPowerMode')?.value||'25R2500');
+   baronPerfSet('baronMPRPM',`${cruise.mp.toFixed(1)} in Hg / ${cruise.rpm} RPM`);
+   baronPerfSet('baronKTAS',Math.round(cruise.ktas));
+   baronPerfSet('baronKIAS',Math.round(cruise.kias));
+   baronPerfSet('baronCruiseFuelFlow',cruise.ff.toFixed(1));
+   const loadedFuel=Number($('fuel')?.value)||0, destFuel=Number($('fuelDest')?.value)||0, availableGal=Math.max(0,loadedFuel-Math.max(0,destFuel));
+   baronPerfSet('baronFlightTime',cruise.ff>0?`${Math.floor((availableGal/(cruise.ff*2))*1)}:${String(Math.round((((availableGal/(cruise.ff*2))*60)%60))).padStart(2,'0')}`:'');
+   const targetAlt=Number($('baronFlightAlt')?.value);
+   const climb=Number.isFinite(targetAlt)&&targetAlt>to.pa&&targetAlt<=16000?baronDigitizedFlightClimb(model,targetAlt,to.pa,to.temp,tW):null;
+   if(climb){baronPerfSet('baronTimeClimb',climb.time.toFixed(1));baronPerfSet('baronFuelClimb',climb.fuel.toFixed(1));baronPerfSet('baronDistClimb',climb.dist.toFixed(1));}
+   baronPerfSet('baronSECeiling',baronDigitizedServiceCeiling(model,to.temp,tW));
+   any=true;
+ }
+ if(validPA(ld.pa)&&validT(ld.temp)&&lW>0&&lW<=BARON_DIGITIZED[model].ldMax){
+   const ldD=baronDigitizedLanding(model,ld.pa,ld.temp,lW,Number.isFinite(ld.hwc)?ld.hwc:0);
+   Object.entries({baronLdVref:ldD.vref,baronLdGround:ldD.ground,baronLdDistance:ldD.total,baronImVref:ldD.vref,baronImGround:ldD.ground,baronImDistance:ldD.total}).forEach(([k,v])=>baronPerfSet(k,v));
+   any=true;
+ }
+ if(any){setBaronLookupStatus('baronLookupStatus','Digitized POH curve estimate','Outputs are interpolated from the published nomogram curve shapes and calibrated to the POH worked examples. They are estimates, not replacement POH values.');}
+ else setBaronLookupStatus('baronLookupStatus','POH chart lookup required','Enter valid Baron performance inputs within the published chart ranges.');
+ saveBaronPerfState();return any;
+}
+function baronPerfExampleAutofill(){return baronDigitizedPerfAutofill()}
+function baronNomogramCatalog(isG){
+ const model=isG?'g58':'b58';
+ const common=[
+  ['takeoff-weight','Take-Off Weight','Maximum take-off weight for positive OEI rate at liftoff'],
+  ['wind-components','Wind Components','Headwind / tailwind and crosswind component chart'],
+  ['takeoff-distance','Take-Off Distance','Ground roll and total distance over 50-ft obstacle'],
+  ['accelerate-stop','Accelerate-Stop Distance','Rejected take-off distance'],
+  ['accelerate-go','Accelerate-Go Distance','One-engine-inoperative take-off distance'],
+  ['takeoff-climb-gradient','Take-Off Climb Gradient — One Engine Inoperative','OEI climb gradient'],
+  ['climb-two-engine','Climb — Two Engine','Two-engine climb performance'],
+  ['climb-one-engine','Climb — One Engine Inoperative','OEI climb performance'],
+  ['service-ceiling','Service Ceiling — One Engine Inoperative','OEI service ceiling'],
+  ['time-fuel-distance-climb','Time, Fuel & Distance to Cruise Climb','Cruise-climb planning chart'],
+  ['balked-landing','Climb — Balked Landing','Balked-landing climb performance'],
+  ['landing-distance','Landing Distance','Flaps-down landing distance']
+ ];
+ return common.map(([key,title,desc])=>({key,title,desc,src:`assets/baron/${model}/${key}.webp`}));
+}
+function ensureBaronNomogramOverlay(){
+ if($('baronNomogramOverlay'))return;
+ const o=document.createElement('div');o.id='baronNomogramOverlay';o.className='baron-nomo-overlay';o.innerHTML=`<div class="baron-nomo-modal"><div class="baron-nomo-modal-head"><div><span id="baronNomoModalKicker">POH NOMOGRAM</span><h3 id="baronNomoModalTitle">Baron Performance Chart</h3></div><button type="button" id="baronNomoClose" class="baron-nomo-close" aria-label="Close">×</button></div><div class="baron-nomo-modal-body"><img id="baronNomoModalImg" alt="Baron POH performance nomogram"><p id="baronNomoModalDesc"></p></div></div>`;
+ document.body.appendChild(o);o.addEventListener('click',e=>{if(e.target===o||e.target.id==='baronNomoClose')o.classList.remove('show')});
+}
+function renderBaronNomogramViewer(isG){
+ const items=baronNomogramCatalog(isG);
+ ensureBaronNomogramOverlay();
+ return `<section class="perf-card baron-nomogram-card" style="grid-column:1/-1"><div class="perf-card-head"><div><span class="perf-number">04</span><h3>POH Nomogram Library</h3></div><span class="perf-badge">${isG?'G58 Rev A13':'B58'} • Section 5</span></div><div class="baron-nomo-intro"><b>Actual Baron POH nomograms are built into the app.</b> Select any chart below to inspect the source chart, or open it full size for manual lookup. The lookup conditions above are calculated from the current flight data. Validated worked examples are automated; the curve-digitized estimate engine is active for intermediate conditions; the source nomogram remains available for cross-checking.</div><div class="baron-nomo-grid">${items.map((x,i)=>`<button type="button" class="baron-nomo-tile${i===2?' active':''}" data-nomo-key="${x.key}"><span>${String(i+1).padStart(2,'0')}</span><strong>${x.title}</strong><small>${x.desc}</small></button>`).join('')}</div><div class="baron-nomo-preview"><div class="baron-nomo-preview-head"><div><span>SELECTED NOMOGRAM</span><b id="baronNomoPreviewTitle">${items[2].title}</b></div><button type="button" id="baronNomoOpen" class="baron-nomo-open">Open full size ↗</button></div><img id="baronNomoPreviewImg" src="${items[2].src}" alt="${items[2].title} from the Baron POH"><div class="baron-nomo-source">Source: applicable Beechcraft Baron POH Section 5 performance chart supplied for this aircraft model.</div></div></section>`;
+}
+function bindBaronNomogramViewer(isG){
+ const items=baronNomogramCatalog(isG),map=new Map(items.map(x=>[x.key,x]));
+ const preview=$('baronNomoPreviewImg'),title=$('baronNomoPreviewTitle'),open=$('baronNomoOpen');
+ const modal=$('baronNomogramOverlay'),mi=$('baronNomoModalImg'),mt=$('baronNomoModalTitle'),md=$('baronNomoModalDesc');
+ const select=x=>{const item=map.get(x);if(!item)return;if(preview){preview.src=item.src;preview.alt=item.title}if(title)title.textContent=item.title;document.querySelectorAll('.baron-nomo-tile').forEach(b=>b.classList.toggle('active',b.dataset.nomoKey===x));if(open)open.dataset.nomoKey=x};
+ document.querySelectorAll('.baron-nomo-tile').forEach(b=>b.addEventListener('click',()=>select(b.dataset.nomoKey)));
+ if(open)open.addEventListener('click',()=>{const item=map.get(open.dataset.nomoKey||'takeoff-distance');if(!item)return;mi.src=item.src;mi.alt=item.title;mt.textContent=item.title;md.textContent=item.desc;modal.classList.add('show')});
+ const initial=items[2];if(open)open.dataset.nomoKey=initial.key;
+}
+function renderPerformanceBaron(){const m=$('perfModule');if(!m)return;if(!performanceBaronActive){captureC172PerformanceTemplate();performanceBaronActive=true}const a=aircraft();const isG=a.type.includes('G1000');const h=m.querySelector('.perf-head'),g=m.querySelector('.perf-grid'),notes=m.querySelector('.perf-notes');if(notes)notes.style.display='none';if(h)h.innerHTML=`<div><div class="perf-kicker">${a.type.includes('G1000')?'G58 G1000':'B58'} • PERFORMANCE</div><h2>Takeoff &amp; Landing Performance</h2><p>Baron workflow using the POH performance charts and the Seneca Form #303 structure.</p></div><div class="perf-weight-card"><span>WEIGHTS LINKED FROM W&amp;B</span><div><small>Actual T/O Weight</small><b>${fmt(lastEnvelopeState?.take?.weight||0,1)} lb</b></div><div><small>Landing Weight</small><b>${fmt(lastEnvelopeState?.land?.weight||0,1)} lb</b></div></div>`;
+ if(g)g.innerHTML=`<section class="perf-card"><div class="perf-card-head"><div><span class="perf-number">01</span><h3>Departure</h3></div><span class="perf-badge">POH Chart • Digitized Estimate</span></div><div class="perf-fields"><div class="field"><label>Elevation (ft)</label><input id="toElevation" type="number" min="0" step="10" placeholder="e.g. 5650"></div><div class="field"><label>Active Runway</label><input id="toRunwayHeading" type="text" maxlength="3" placeholder="09"></div><div class="field"><label>Wind Velocity</label><input id="toWindVelocity" type="text" placeholder="090/10"></div><div class="field"><label>Alt. Setting (inHg)</label><input id="toAltimeter" type="number" min="28" max="31" step="0.01" placeholder="29.60"></div><div class="field"><label>TORA (ft)</label><input id="toTORA" type="number" min="0" step="10"></div><div class="field"><label>TODA (ft)</label><input id="toTODA" type="number" min="0" step="10"></div><div class="field"><label>ASDA (ft)</label><input id="toASDA" type="number" min="0" step="10"></div><div class="field calculated-field"><label>Pressure Altitude (ft)</label><input id="toPA" class="readonly" readonly></div><div class="field"><label>Temperature (°C)</label><input id="toTemp" type="number" step="1" value="15"></div><div class="field calculated-field"><label>Density Altitude (ft)</label><input id="toDA" class="readonly" readonly></div><div class="field calculated-field"><label>HWC (kt)</label><input id="toHWC" class="readonly" readonly></div><div class="field calculated-field"><label>XWC (kt)</label><input id="toXWC" class="readonly" readonly></div></div><div class="baron-perf-entry"><div class="field"><label>Max Safe T/O Weight (lb)</label><input id="baronToMaxSafe" type="number" readonly step="1"></div><div class="field"><label>Accelerate-Stop (ft)</label><input id="baronToAccelStop" type="number" readonly step="1"></div><div class="field"><label>Accelerate-Go (ft)</label><input id="baronToAccelGo" type="number" readonly step="1"></div><div class="field"><label>Ground Run (ft)</label><input id="baronToGround" type="number" readonly step="1"></div><div class="field"><label>Gradient (%)</label><input id="baronToGradient" type="number" readonly step="0.1"></div><div class="field"><label>S.E. Rate of Climb (fpm)</label><input id="baronToSEROC" type="number" readonly step="1"></div><div class="field"><label>Take-Off Distance (ft)</label><input id="baronToDistance" type="number" readonly step="1"></div><div class="field"><label>V<sub>REF</sub> / Lift-Off (kt)</label><input id="baronToVx" type="number" readonly step="1"></div><div class="field"><label>50-ft Speed (kt)</label><input id="baronToV50" type="number" readonly step="1"></div></div><div class="bp-subhead" style="margin-top:10px">Immediate Landing — enter from landing chart using departure conditions</div><div class="baron-perf-entry"><div class="field"><label>V<sub>REF</sub> (kt)</label><input id="baronImVref" type="number" readonly step="1"></div><div class="field"><label>Ground Roll (ft)</label><input id="baronImGround" type="number" readonly step="1"></div><div class="field"><label>Landing Distance (ft)</label><input id="baronImDistance" type="number" readonly step="1"></div></div><div class="baron-example">${isG?'G58 POH calibration: 15°C / 5653 ft PA / 5500 lb / 10 kt HWC → 2200 ft ground, 3775 ft over 50 ft; 4700 lb → 9400 ft accelerate-go and 2.6% gradient. Intermediate conditions are chart-digitized estimates.':'B58 POH calibration: 15°C / 5650 ft PA / 5400 lb / 9.5 kt HWC → 1900 ft ground, 3090 ft over 50 ft; 4850 lb → 8071 ft and 2.1% gradient. Intermediate conditions are chart-digitized estimates.'}</div><div id="baronLookupStatus" class="baron-lookup-status neutral"><b>POH lookup status</b><span>Checking the applicable POH chart example.</span></div><div class="perf-results" id="toResults"></div></section><section class="perf-card"><div class="perf-card-head"><div><span class="perf-number">02</span><h3>Destination</h3></div><span class="perf-badge">Landing • Flaps Down</span></div><div class="perf-fields"><div class="field"><label>Landing Elevation (ft)</label><input id="ldElevation" type="number" min="0" step="10"></div><div class="field"><label>Active Runway</label><input id="ldRunwayHeading" type="text" maxlength="3" placeholder="09"></div><div class="field"><label>Wind Velocity</label><input id="ldWindVelocity" type="text" placeholder="090/10"></div><div class="field"><label>Alt. Setting (inHg)</label><input id="ldAltimeter" type="number" min="28" max="31" step="0.01"></div><div class="field"><label>LDA (ft)</label><input id="ldLDA" type="number" min="0" step="10"></div><div class="field"><label>Temperature (°C)</label><input id="ldTemp" type="number" step="1" value="25"></div><div class="field calculated-field"><label>Pressure Altitude (ft)</label><input id="ldPA" class="readonly" readonly></div><div class="field calculated-field"><label>Density Altitude (ft)</label><input id="ldDA" class="readonly" readonly></div><div class="field calculated-field"><label>HWC (kt)</label><input id="ldHWC" class="readonly" readonly></div><div class="field calculated-field"><label>XWC (kt)</label><input id="ldXWC" class="readonly" readonly></div></div><div class="baron-perf-entry"><div class="field"><label>V<sub>REF</sub> (kt)</label><input id="baronLdVref" type="number" readonly step="1"></div><div class="field"><label>Ground Roll (ft)</label><input id="baronLdGround" type="number" readonly step="1"></div><div class="field"><label>Landing Distance (ft)</label><input id="baronLdDistance" type="number" readonly step="1"></div><div class="field"><label>Minimum Fuel Required (US Gal)</label><input id="baronMinFuel" type="number" step="0.1"></div></div><div class="baron-example">POH landing calibration: 25°C / 3965 ft PA / 5039 lb / 9.5 kt HWC → 1450 ft ground, 2500 ft over 50 ft, 91 kt approach. Intermediate conditions are chart-digitized estimates.</div><div class="perf-results" id="ldResults"></div></section><section class="perf-card" style="grid-column:1/-1"><div class="perf-card-head"><div><span class="perf-number">03</span><h3>Flight Data</h3></div><span class="perf-badge">POH Flight Planning</span></div><div class="baron-perf-entry"><div class="field"><label>Altitude (ft)</label><input id="baronFlightAlt" type="number"></div><div class="field calculated-field"><label>Time to Climb (min)</label><input id="baronTimeClimb" class="readonly" type="number" readonly step="0.1"></div><div class="field calculated-field"><label>Fuel to Climb (US Gal)</label><input id="baronFuelClimb" class="readonly" type="number" readonly step="0.1"></div><div class="field calculated-field"><label>Dist to Climb (NM)</label><input id="baronDistClimb" class="readonly" type="number" readonly step="0.1"></div><div class="field calculated-field"><label>Single Engine Service Ceiling (ft)</label><input id="baronSECeiling" class="readonly" type="number" readonly></div><div class="field calculated-field"><label>Two-Engine Rate of Climb (fpm)</label><input id="baronTwoEngineROC" class="readonly" type="number" readonly></div><div class="field"><label>Cruise Power</label><select id="baronPowerMode"><option value="25R2500">25 / 2500 — Rich</option><option value="25L2500">25 / 2500 — Lean</option><option value="23R2300">23 / 2300 — Rich</option><option value="23L2300">23 / 2300 — Lean</option></select></div><div class="field calculated-field"><label>MP/RPM</label><input id="baronMPRPM" class="readonly" type="text" readonly></div><div class="field calculated-field"><label>KTAS</label><input id="baronKTAS" class="readonly" type="number" readonly></div><div class="field calculated-field"><label>KIAS</label><input id="baronKIAS" class="readonly" type="number" readonly></div><div class="field calculated-field"><label>Fuel Flow (GPH, total)</label><input id="baronCruiseFuelFlow" class="readonly" type="number" readonly></div><div class="field calculated-field"><label>Available Flight Time</label><input id="baronFlightTime" class="readonly" type="text" readonly placeholder="H:MM"></div></div><div class="baron-perf-note"><b>Flight-planning estimate:</b> Enter the target cruise altitude above. Time, fuel and distance to climb are interpolated from the POH cruise-climb nomogram. Cruise power, MP/RPM, KTAS, KIAS, fuel flow, available flight time and two-engine ROC are digitized/interpolated from the applicable Section 5 POH tables/charts.</div></section>${renderBaronNomogramViewer(a.type.includes('G1000'))}`;
+ bindBaronNomogramViewer(a.type.includes('G1000'));loadBaronPerfState();const to0=baronPerfConditions('to'),ld0=baronPerfConditions('ld');['to','ld'].forEach(p=>{const c=p==='to'?to0:ld0;baronPerfSet(p+'PA',Number.isFinite(c.pa)?fmt(c.pa,0):'');baronPerfSet(p+'DA',Number.isFinite(c.da)?fmt(c.da,0):'');baronPerfSet(p+'HWC',c.hwc===null?'':fmt(c.hwc,1));baronPerfSet(p+'XWC',c.xwc===null?'':fmt(c.xwc,1))});baronPerfExampleAutofill();const to=baronPerfConditions('to'),ld=baronPerfConditions('ld');['to','ld'].forEach(p=>{const c=p==='to'?to:ld;baronPerfSet(p+'PA',Number.isFinite(c.pa)?fmt(c.pa,0):'');baronPerfSet(p+'DA',Number.isFinite(c.da)?fmt(c.da,0):'');baronPerfSet(p+'HWC',c.hwc===null?'':fmt(c.hwc,1));baronPerfSet(p+'XWC',c.xwc===null?'':fmt(c.xwc,1))});
+ const r=lastEnvelopeState?.take?.weight||0,l=lastEnvelopeState?.land?.weight||0;const toDist=n('baronToDistance'),ldDist=n('baronLdDistance');$('toResults').innerHTML=`<div class="perf-result primary"><span>TAKE-OFF DISTANCE OVER 50 FT</span><b>${toDist?fmt(toDist,0)+' ft':'Enter POH chart result'}</b><small>Actual T/O weight ${fmt(r,1)} lb • HWC ${to.hwc===null?'—':fmt(to.hwc,1)} kt</small></div><div class="perf-status ${toDist&&(!Number($('toTODA').value)||toDist<=Number($('toTODA').value))?'good':'neutral'}">${toDist&&Number($('toTODA').value)?(toDist<=Number($('toTODA').value)?'✓ TODA sufficient':'✕ TODA insufficient'): 'Baron POH curve-digitized estimate shown above. Verify the result against the applicable POH nomogram before flight.'}</div>`;$('ldResults').innerHTML=`<div class="perf-result primary"><span>LANDING DISTANCE OVER 50 FT</span><b>${ldDist?fmt(ldDist,0)+' ft':'Enter POH chart result'}</b><small>Landing weight ${fmt(l,1)} lb • HWC ${ld.hwc===null?'—':fmt(ld.hwc,1)} kt</small></div><div class="perf-status ${ldDist&&(!Number($('ldLDA').value)||ldDist<=Number($('ldLDA').value))?'good':'neutral'}">${ldDist&&Number($('ldLDA').value)?(ldDist<=Number($('ldLDA').value)?'✓ LDA sufficient':'✕ LDA insufficient'):'Baron POH curve-digitized estimate shown above. Verify the result against the applicable POH landing nomogram before flight.'}</div>`;
+ const all=[...document.querySelectorAll('#perfModule input,#perfModule select')];const refreshBaronPerf=()=>{const to=baronPerfConditions('to'),ld=baronPerfConditions('ld');[['to',to],['ld',ld]].forEach(([p,c])=>{baronPerfSet(p+'PA',Number.isFinite(c.pa)?fmt(c.pa,0):'');baronPerfSet(p+'DA',Number.isFinite(c.da)?fmt(c.da,0):'');baronPerfSet(p+'HWC',c.hwc===null?'':fmt(c.hwc,1));baronPerfSet(p+'XWC',c.xwc===null?'':fmt(c.xwc,1))});baronDigitizedPerfAutofill();const r=lastEnvelopeState?.take?.weight||0,l=lastEnvelopeState?.land?.weight||0,toDist=n('baronToDistance'),ldDist=n('baronLdDistance');if($('toResults'))$('toResults').innerHTML=`<div class="perf-result primary"><span>TAKE-OFF DISTANCE OVER 50 FT</span><b>${toDist?fmt(toDist,0)+' ft':'Enter POH chart result'}</b><small>Actual T/O weight ${fmt(r,1)} lb • HWC ${to.hwc===null?'—':fmt(to.hwc,1)} kt</small></div><div class="perf-status neutral">${toDist?'POH curve-digitized estimate. Verify against the source nomogram.':'Enter valid Baron performance inputs to calculate.'}</div>`;if($('ldResults'))$('ldResults').innerHTML=`<div class="perf-result primary"><span>LANDING DISTANCE OVER 50 FT</span><b>${ldDist?fmt(ldDist,0)+' ft':'Enter POH chart result'}</b><small>Landing weight ${fmt(l,1)} lb • HWC ${ld.hwc===null?'—':fmt(ld.hwc,1)} kt</small></div><div class="perf-status neutral">${ldDist?'POH curve-digitized estimate. Verify against the source nomogram.':'Enter valid Baron performance inputs to calculate.'}</div>`;saveBaronPerfState();renderPaperwork()};all.forEach(el=>el.addEventListener('input',refreshBaronPerf));all.forEach(el=>el.addEventListener('change',refreshBaronPerf));
+}
+function renderPerformance(){if(isBaron()){renderPerformanceBaron();return}if(performanceBaronActive)restoreC172PerformanceUI();performanceCalc('takeoff');performanceCalc('landing')}
+function renderBaronPaperwork(){
+ const a=aircraft(),s=lastEnvelopeState||{},date=val('flightDate',''),pic=val('picName','—');const z=s.z||{},r=s.ramp||{},t=s.take||{},l=s.land||{};
+ const picW=n('picWeight'),frontPW=n('frontPassenger'),rear1W=n('rear1'),rear2W=n('rear2'),nose=n('bag1'),rearBag=n('bag2'),aftBag=n('bag3'),fuel=n('fuel'),dest=n('fuelDest');const picArm=baronArm('picArm',BARON_FRONT_DEFAULT_ARM),frontPassengerArm=baronArm('frontPassengerArm',BARON_FRONT_DEFAULT_ARM),rear1Arm=baronArm('rear1Arm',BARON_REAR_DEFAULT_ARM),rear2Arm=baronArm('rear2Arm',BARON_REAR_DEFAULT_ARM),noseArm=baronArm('bag1Arm',BARON_NOSE_DEFAULT_ARM),rearBagArm=baronArm('bag2Arm',BARON_REAR_BAG_ARM),aftBagArm=baronArm('bag3Arm',BARON_AFT_BAG_ARM);const front=picW+frontPW,rear=rear1W+rear2W;
+ const escv=x=>esc(String(x??''));const cg=(p,cl)=>`<div class="bp-cg ${cl}"><b>C of G</b><span>${p.weight?fmt(p.cg,1)+' in':'—'}</span></div>`;
+ $('wbPaperPreview').innerHTML=`<div class="baron-paper"><div class="bp-school">Seneca College School of Aviation</div><div class="bp-title">WEIGHT AND BALANCE WORK SHEET - B58 / G58</div><div class="bp-rule"></div><div class="bp-meta"><span>DATE: ${escv(date)}</span><span>PIC: ${escv(pic)}</span><span>AIRCRAFT: ${escv(a.reg)}</span></div><div class="bp-table-wrap"><table><thead><tr><th>ITEM</th><th>WEIGHT (lbs)</th><th>MOMENT/100</th></tr></thead><tbody>
+ <tr><td>Empty</td><td>${fmt(a.empty,2)}</td><td>${fmt(a.moment/100,1)}</td></tr>
+ <tr><td>Front Seats (PIC + Passenger)</td><td>${fmt(front,2)}</td><td>${fmt((picW*picArm+frontPW*frontPassengerArm)/100,1)}</td></tr>
+ <tr><td>Aft Seats (Passengers)</td><td>${fmt(rear,2)}</td><td>${fmt((rear1W*rear1Arm+rear2W*rear2Arm)/100,1)}</td></tr>
+ <tr><td>Nose Baggage</td><td>${fmt(nose,2)}</td><td>${fmt(nose*noseArm/100,1)}</td></tr>
+ <tr><td>Rear Baggage</td><td>${fmt(rearBag,2)}</td><td>${fmt(rearBag*rearBagArm/100,1)}</td></tr>
+ <tr><td>Aft Baggage</td><td>${fmt(aftBag,2)}</td><td>${fmt(aftBag*aftBagArm/100,1)}</td></tr>
+ <tr class="bp-total"><td><b>Sub Total -</b><br><i>Zero Fuel Condition</i></td><td>${fmt(z.weight,2)}</td><td>${fmt(z.moment/100,1)}</td></tr>
+ <tr class="bp-heavy"><td>Fuel Loading (US Gal)</td><td>${fmt(fuel*6,0)}</td><td>${fmt(baronFuelMoment(fuel),1)}</td></tr>
+ <tr class="bp-total"><td><b>Sub Total -</b><br>Ramp Condition</td><td>${fmt(r.weight,2)}</td><td>${fmt(r.moment/100,1)}</td></tr>
+ <tr><td>Subtract Fuel for Start, Taxi,<br>and Run Up</td><td>-24</td><td>-20</td></tr>
+ <tr class="bp-total"><td><b>Sub Total -</b><br><i>Take-Off Condition</i></td><td>${fmt(t.weight,2)}</td><td>${fmt(t.moment/100,1)}</td></tr>
+ <tr class="bp-heavy"><td>Fuel at Dest. (US Gal)</td><td>${fmt(dest*6,0)}</td><td>${fmt(baronFuelMoment(dest),1)}</td></tr>
+ <tr class="bp-total"><td><i>Landing Condition</i></td><td>${fmt(l.weight,2)}</td><td>${fmt(l.moment/100,1)}</td></tr>
+ </tbody></table>${cg(z,'bp-cg1')}${cg(t,'bp-cg2')}${cg(l,'bp-cg3')}</div>
+ <div class="bp-note">Fuel for start, taxi and take-off is normally 24 lbs at an average moment/100 of 20.</div>
+ <div class="bp-limits"><h4>Aircraft Limitations</h4><div><b>Max Ramp</b> 5524 lbs</div><div><b>Max Takeoff</b> 5500 lbs</div><div><b>Max Landing</b> 5400 lbs</div></div>
+ <div class="bp-footer">Form #303 (11/20/19) &nbsp;&nbsp; Revision 3</div></div>`;
+ const perf=document.querySelector('.perf-paper-card');if(perf)perf.style.display='none';const sub=document.querySelector('#wbPaperSubtitle');if(sub)sub.textContent='Seneca Weight and Balance Work Sheet — B58 / G58';
+ const banner=$('paperworkCompleteBanner');if(banner){banner.className='paperwork-banner '+(s.z&&s.take&&s.land?'complete':'');banner.textContent=s.z&&s.take&&s.land?'✓ Baron W&B worksheet populated from the Seneca Form #303 layout.':'Complete the Baron W&B inputs to populate the worksheet.'}
+}
+function renderPaperwork(){if(isBaron()){renderBaronPaperwork();renderBaronPerformancePaperwork();}else{const perfCard=document.querySelector('.perf-paper-card');if(perfCard)perfCard.style.display='block';const sub=document.querySelector('#wbPaperSubtitle');if(sub)sub.textContent='Seneca Weight and Balance Work Sheet — C172S';renderPaperworkC172()}}
+function renderBaronPerformancePaperwork(){const a=aircraft(),to=baronPerfConditions('to'),ld=baronPerfConditions('ld'),s=lastEnvelopeState||{};const t=s.take||{},l=s.land||{};const v=id=>val(id,'—');const f=(label,value)=>`<div class="bp-field"><span>${label}</span><span class="v">${esc(value)}</span></div>`;const wind=id=>windDisplay(id);const p=(x)=>Number.isFinite(x)?fmt(x,0):'—';const complete=!!v('baronToDistance')&&!!v('baronLdDistance');const card=document.querySelector('.perf-paper-card');if(card)card.style.display='block';const head=card?.querySelector('.paperwork-card-head p');if(head)head.textContent='Seneca Aircraft Performance Calculations — B58';const badge=card?.querySelector('.form-badge');if(badge)badge.textContent='Form #303 12/03/25';$('perfPaperPreview').innerHTML=`<div class="baron-paper"><div class="bp-school">Seneca College School of Aviation</div><div class="bp-title">AIRCRAFT PERFORMANCE CALCULATIONS - ${a.type.includes('G1000')?'G58':'B58'}</div><div class="bp-rule"></div><div class="bp-section">DEPARTURE DATA</div><div class="bp-grid"><div class="bp-col">${f('Elevation',v('toElevation'))}${f('Alt. Setting',v('toAltimeter'))}${f('Pressure Alt.',p(to.pa))}${f('Temperature',v('toTemp'))}${f('Density Alt.',p(to.da))}</div><div class="bp-col">${f('Runway',v('toRunwayHeading'))}${f('TORA',v('toTORA'))}${f('TODA',v('toTODA'))}${f('ASDA',v('toASDA'))}</div><div class="bp-col">${f('Wind',wind('toWindVelocity'))}${f('HWC',to.hwc===null?'—':fmt(to.hwc,1))}${f('XWC',to.xwc===null?'—':fmt(to.xwc,1))}</div></div><div class="bp-grid"><div class="bp-col">${f('Max Safe T/O Weight',v('baronToMaxSafe')?v('baronToMaxSafe')+' lbs':'—')}${f('Actual T/O Weight',t.weight?fmt(t.weight,1)+' lbs':'—')}</div><div class="bp-col"><div class="bp-subhead">Take-Off Distances</div>${f('Accel. Stop',v('baronToAccelStop')?v('baronToAccelStop')+' ft':'—')}${f('Accel. Go',v('baronToAccelGo')?v('baronToAccelGo')+' ft':'—')}${f('Ground Run',v('baronToGround')?v('baronToGround')+' ft':'—')}</div><div class="bp-col"><div class="bp-subhead">&nbsp;</div>${f('Gradient',v('baronToGradient')?v('baronToGradient')+' %':'—')}${f('S.E Rate of Climb',v('baronToSEROC')?v('baronToSEROC')+' fpm':'—')}${f('Take Off Distance',v('baronToDistance')?v('baronToDistance')+' ft':'—')}</div></div><div class="bp-subhead">Immediate Landing</div><div class="bp-distance">${f('VREF',v('baronImVref')?v('baronImVref')+' kt':'—')}${f('Ground Roll',v('baronImGround')?v('baronImGround')+' ft':'—')}${f('Landing Distance',v('baronImDistance')?v('baronImDistance')+' ft':'—')}</div><div class="bp-section bp-flight">FLIGHT DATA</div><div class="bp-grid"><div class="bp-col">${f('Altitude',v('baronFlightAlt'))}${f('Time to Climb',v('baronTimeClimb'))}${f('Fuel to Climb',v('baronFuelClimb'))}${f('Dist to Climb',v('baronDistClimb'))}${f('Single Engine Service Ceiling',v('baronSECeiling'))}${f('Two-Engine ROC',v('baronTwoEngineROC'))}</div><div class="bp-col">${f('MP/RPM',v('baronMPRPM'))}${f('KTAS',v('baronKTAS'))}${f('KIAS',v('baronKIAS'))}${f('Fuel Flow',v('baronCruiseFuelFlow'))}</div><div class="bp-col">${f('Available Flight Time',v('baronFlightTime'))}</div></div><div class="bp-section bp-dest">DESTINATION DATA</div><div class="bp-grid"><div class="bp-col">${f('LDG Weight',l.weight?fmt(l.weight,1)+' lbs':'—')}${f('Elevation',v('ldElevation'))}${f('Alt. Setting',v('ldAltimeter'))}${f('Pressure Alt.',p(ld.pa))}${f('Temperature',v('ldTemp'))}${f('Density Alt.',p(ld.da))}</div><div class="bp-col">${f('Runway',v('ldRunwayHeading'))}${f('LDA',v('ldLDA'))}</div><div class="bp-col">${f('Wind',wind('ldWindVelocity'))}${f('HWC',ld.hwc===null?'—':fmt(ld.hwc,1))}${f('XWC',ld.xwc===null?'—':fmt(ld.xwc,1))}</div></div><div class="bp-subhead">Landing Distances</div><div class="bp-distance">${f('VREF',v('baronLdVref')?v('baronLdVref')+' kt':'—')}${f('Ground Roll',v('baronLdGround')?v('baronLdGround')+' ft':'—')}${f('Landing Distance',v('baronLdDistance')?v('baronLdDistance')+' ft':'—')}</div><div class="bp-subhead">Minimum Fuel Required <span style="display:inline-block;border-bottom:1px solid #111;min-width:130px;margin-left:10px">${v('baronMinFuel')}</span></div><div class="bp-complete">${complete?'✓ Baron performance worksheet populated from digitized POH curve estimates.':'Complete the POH chart output fields to populate every performance box.'}</div><div class="bp-paper-note">Baron performance outputs are chart-digitized estimates based on the applicable POH nomograms and calibrated worked examples. Verify against the POH before operational use.</div><div class="bp-footer">Form #303 (12/03/25) &nbsp;&nbsp; Revision 2025-1</div></div>`}
+function saveDraftBaron(){const ids=['aircraft','flightDate','picName','picWeight','frontPassenger','rear1','rear2','picArm','frontPassengerArm','rear1Arm','rear2Arm','bag1','bag2','bag3','bag1Arm','bag2Arm','bag3Arm','fuel','fuelDest'];const d={};ids.forEach(id=>{const el=$(id);if(el)d[id]=el.value});localStorage.setItem('senecaFlightDraftV07',JSON.stringify(d))}
+function loadBaronDraft(){try{const d=JSON.parse(localStorage.getItem('senecaFlightDraftV07'));if(d)Object.entries(d).forEach(([k,v])=>{if($(k))$(k).value=v})}catch(e){}}
+const C172_LIMIT_COLUMNS_MARKUP=document.querySelector('#wbModule .limit-columns')?.innerHTML||'';
+const C172_LIMIT_GRID_MARKUP=document.querySelector('#wbModule .limit-grid')?.innerHTML||'';
+const TAKEOFF_TABLES={
+  2200:{0:[[610,1055],[665,1145],[725,1250],[795,1365],[870,1490],[955,1635],[1050,1800],[1150,1985],[1270,2195]],10:[[655,1130],[720,1230],[785,1340],[860,1465],[940,1605],[1030,1765],[1130,1940],[1245,2145],[1370,2375]],20:[[705,1205],[770,1315],[845,1435],[925,1570],[1010,1725],[1110,1900],[1220,2090],[1340,2305],[1475,2555]],30:[[760,1290],[830,1410],[905,1540],[995,1685],[1090,1855],[1195,2035],[1310,2240],[1435,2475],[1580,2745]],40:[[815,1380],[890,1505],[975,1650],[1065,1805],[1165,1975],[1275,2175],[1400,2395],[1540,2650],[1695,2950]]},
+  2400:{0:[[745,1275],[810,1390],[885,1520],[970,1665],[1065,1830],[1170,2015],[1285,2230],[1415,2470],[1560,2755]],10:[[800,1370],[875,1495],[955,1635],[1050,1795],[1150,1975],[1265,2180],[1390,2410],[1530,2685],[1690,3000]],20:[[860,1470],[940,1605],[1030,1760],[1130,1930],[1240,2130],[1360,2355],[1500,2610],[1650,2900],[1815,3240]],30:[[925,1570],[1010,1720],[1110,1890],[1215,2080],[1335,2295],[1465,2530],[1610,2805],[1770,3125],[1950,3500]],40:[[995,1685],[1085,1845],[1190,2030],[1305,2230],[1430,2455],[1570,2715],[1725,3015],[1900,3370],[2095,3790]]},
+  2550:{0:[[860,1465],[940,1600],[1025,1755],[1125,1925],[1235,2120],[1355,2345],[1495,2605],[1645,2910],[1820,3265]],10:[[925,1575],[1010,1720],[1110,1890],[1215,2080],[1335,2295],[1465,2545],[1615,2830],[1785,3170],[1970,3575]],20:[[995,1690],[1090,1850],[1195,2035],[1310,2240],[1440,2480],[1585,2755],[1745,3075],[1920,3440],[2120,3880]],30:[[1070,1810],[1170,1990],[1285,2190],[1410,2420],[1550,2685],[1705,2975],[1875,3320],[2065,3730],[2280,4225]],40:[[1150,1945],[1260,2135],[1380,2355],[1515,2605],[1660,2880],[1825,3205],[2010,3585],[2215,4045],[2450,4615]]}
+};
+const PERF_ALTS=[0,1000,2000,3000,4000,5000,6000,7000,8000],PERF_TEMPS=[0,10,20,30,40];
+const LANDING_2550={0:[[545,1290],[565,1320],[585,1355],[610,1385],[630,1425],[655,1460],[680,1500],[705,1545],[735,1585]],10:[[565,1320],[585,1350],[610,1385],[630,1420],[655,1460],[680,1500],[705,1540],[730,1585],[760,1630]],20:[[585,1350],[605,1385],[630,1420],[655,1460],[675,1495],[705,1535],[730,1580],[760,1625],[790,1670]],30:[[605,1380],[625,1420],[650,1455],[675,1495],[700,1535],[725,1575],[755,1620],[785,1665],[815,1715]],40:[[625,1415],[650,1450],[670,1490],[695,1530],[725,1570],[750,1615],[780,1660],[810,1705],[840,1755]]};
+function ceilChart(v,arr){for(const x of arr)if(v<=x)return x;return null}
+function parseWind(text){const m=String(text||'').trim().match(/^(\d{1,3})\s*[\/ ]\s*(\d+(?:\.\d+)?)$/);if(!m)return null;const dir=((Number(m[1])%360)+360)%360,speed=Number(m[2]);return Number.isFinite(speed)?{dir,speed}:null}
+function runwayHeading(text){const m=String(text||'').trim().match(/^(\d{1,2})(?:[LCR])?$/i);if(!m)return null;const n=Number(m[1]);return n>=1&&n<=36?n*10:null}
+function perfConditions(prefix){const elevation=Number($(prefix+'Elevation').value),altimeter=Number($(prefix+'Altimeter').value),temp=Number($(prefix+'Temp').value);const pa=(Number.isFinite(elevation)&&Number.isFinite(altimeter)&&altimeter>=28&&altimeter<=31)?elevation+(29.92-altimeter)*1000:null;const isa=Number.isFinite(pa)?15-1.98*(pa/1000):null;const da=(Number.isFinite(pa)&&Number.isFinite(temp))?pa+120*(temp-isa):null;const rw=runwayHeading($(prefix+'RunwayHeading').value),wind=parseWind($(prefix+'WindVelocity').value);let hwc=null,xwc=null;if(rw!==null&&wind){const a=(wind.dir-rw)*Math.PI/180;hwc=wind.speed*Math.cos(a);xwc=Math.abs(wind.speed*Math.sin(a))}return{elevation,altimeter,temp,pa,da,rw,wind,hwc,xwc}}
+function performanceWindFactorFromComponent(hwc){if(hwc===null)return 1;if(hwc>=0)return Math.max(0,1-(Math.abs(hwc)*0.10/9));return 1+(Math.min(Math.abs(hwc),10)*0.10/2)}
+function getPerfResult(isTake,prefix,actualW){const p=perfConditions(prefix),surface=$(prefix+'Surface').value;if(actualW<=0||actualW>2550||!Number.isFinite(p.pa)||!Number.isFinite(p.temp)||p.pa<0||p.pa>8000||p.temp<0||p.temp>40||!p.wind||p.rw===null||p.hwc< -10)return null;const chartWeight=isTake?(actualW<=2200?2200:actualW<=2400?2400:2550):2550,chartAlt=ceilChart(p.pa,PERF_ALTS),chartTemp=ceilChart(p.temp,PERF_TEMPS);if(chartAlt===null||chartTemp===null)return null;const base=(isTake?TAKEOFF_TABLES[chartWeight]:LANDING_2550)[chartTemp][PERF_ALTS.indexOf(chartAlt)];let ground=base[0],total=base[1];const roundedHwc=p.hwc===null?null:(p.hwc>=0?Math.floor(p.hwc):Math.ceil(p.hwc));const wf=performanceWindFactorFromComponent(roundedHwc);ground*=wf;total*=wf;if(surface==='grass')total+=ground*(isTake?0.15:0.45);const runway=Number($(isTake?'toTORA':prefix==='ld'?'ldLDA':'toTORA').value)||0;const speeds=isTake?({2200:[44,50],2400:[48,54],2550:[51,56]}[chartWeight]):[null,null];const vref=isTake?null:1.3*48*Math.sqrt(actualW/2550);return{p,ground,total,chartWeight,chartAlt,chartTemp,runway,runwayOK:!runway||runway>=total,speeds,vref};}
+function performanceCalc(kind){
+ if(isBaron())return;
+ const takeW=lastEnvelopeState?.take?.weight||0,landW=lastEnvelopeState?.land?.weight||0,isTake=kind==='takeoff',actualW=isTake?takeW:landW,p=perfConditions(isTake?'to':'ld'),surface=$(isTake?'toSurface':'ldSurface').value,resultEl=$(isTake?'toResults':'ldResults'),prefix=isTake?'to':'ld';
+ $(prefix+'PA').value=Number.isFinite(p.pa)?fmt(p.pa,0):'—';$(prefix+'DA').value=Number.isFinite(p.da)?fmt(p.da,0):'—';$(prefix+'HWC').value=p.hwc===null?'—':fmt(Math.floor(Math.max(0,p.hwc)),0);$(prefix+'XWC').value=p.xwc===null?'—':fmt(Math.ceil(p.xwc),0);
+ if(actualW<=0){resultEl.innerHTML='<div class="perf-status neutral">Complete the W&amp;B loading first. Performance weight is linked automatically.</div>';return}
+ if(actualW>2550){resultEl.innerHTML='<div class="perf-status bad">Weight exceeds the C172S 2,550 lb performance limit.</div>';return}
+ if(!Number.isFinite(p.pa)||!Number.isFinite(p.temp)||p.pa<0||p.pa>8000||p.temp<0||p.temp>40){resultEl.innerHTML='<div class="perf-status bad">Enter elevation, altimeter setting and temperature within the published 0–8,000 ft / 0–40°C chart coverage.</div>';return}
+ if(!p.wind||p.rw===null){resultEl.innerHTML='<div class="perf-status neutral">Enter active runway and wind velocity (example: 09 and 090/10) to calculate HWC/XWC.</div>';return}
+ if(p.hwc< -10){resultEl.innerHTML='<div class="perf-status bad">The POH wind correction is published for tailwinds up to 10 kt. Reduce the tailwind or use the POH/operator procedure.</div>';return}
+ const r=getPerfResult(isTake,prefix,actualW);if(!r)return;const windLabel=p.wind.speed?`${p.wind.speed} kt ${p.hwc>=0?'headwind':'tailwind'}`:'Zero wind',chartWeightNote=isTake?`POH chart weight ${fmt(r.chartWeight,0)} lb`:'POH landing chart: 2,550 lb';
+ const speed=isTake?`${r.speeds[0]} / ${r.speeds[1]} KIAS`:`${fmt(r.vref,1)} KIAS`;
+ resultEl.innerHTML=`<div class="perf-result primary"><span>REQUIRED DISTANCE OVER 50 FT</span><b>${fmt(r.total,0)} ft</b><small>${chartWeightNote} • ${fmt(r.chartAlt,0)} ft PA • ${fmt(r.chartTemp,0)}°C • ${windLabel}${surface==='grass'?' • dry grass correction':''}</small></div><div class="perf-result"><span>GROUND ${isTake?'RUN':'ROLL'}</span><b>${fmt(r.ground,0)} ft</b><small>After wind${surface==='grass'?' + grass adjustment':''}</small></div><div class="perf-result"><span>${isTake?'LIFT-OFF / 50 FT SPEED':'VREF'}</span><b>${speed}</b><small>${isTake?'Published chart speeds':'1.3 VSO × √(landing weight / 2,550 lb)'}</small></div><div class="perf-status ${!r.runway?'neutral':r.runwayOK?'good':'bad'}">${!r.runway?'Enter runway available to compare required distance.':r.runwayOK?'✓ RUNWAY LENGTH SUFFICIENT • '+fmt(r.runway-r.total,0)+' ft remaining':'✕ RUNWAY LENGTH INSUFFICIENT • '+fmt(r.total-r.runway,0)+' ft short'}</div>`;
+}
+function renderPerformanceC172(){performanceCalc('takeoff');performanceCalc('landing')}
+function esc(v){return String(v??'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[m]))}
+function val(id,fallback='—'){const el=$(id);return el&&el.value!==''?el.value:fallback}
+function windDisplay(id){const w=parseWind(val(id,''));return w?`${String(Math.round(w.dir)).padStart(3,'0')}/${fmt(w.speed,0)}`:'—'}
+function field(label,value){return `<div class="perf-field"><span>${label}</span><span class="v">${esc(value)}</span></div>`}
+function renderPaperworkC172(){
+ const a=AIRCRAFT.find(x=>x.reg===$('aircraft').value)||AIRCRAFT[0],s=lastEnvelopeState||{};const z=s.z||{},r=s.ramp||{},t=s.take||{},l=s.land||{};const date=val('flightDate',new Date().toISOString().slice(0,10)),pic=val('picName','—');
+ const completeIds=['picWeight','frontPassenger','rear1','rear2','bag1','bag2','fuel','fuelDest','toElevation','toRunwayHeading','toWindVelocity','toAltimeter','toTORA','toTODA','toTemp','ldElevation','ldRunwayHeading','ldWindVelocity','ldAltimeter','ldLDA','ldTemp','minFuel'];const complete=completeIds.every(id=>$(id)&&$(id).value!=='')&&!!t.weight&&!!l.weight;
+ $('paperworkCompleteBanner').className='paperwork-banner '+(complete?'complete':'');$('paperworkCompleteBanner').innerHTML=complete?'✓ W&amp;B and Performance data are complete. Both Seneca forms below are populated from the current flight.':'Some inputs are still blank. Complete W&amp;B and Performance fields to populate every worksheet box.';
+ const rows=[['Empty',a.empty,a.moment/1000],['Front Seats (F.S. 34-46)',n('picWeight')+n('frontPassenger'),(n('picWeight')+n('frontPassenger'))*ARM.front/1000],['Aft Seats (F.S. 73)',n('rear1')+n('rear2'),(n('rear1')+n('rear2'))*ARM.aft/1000],['Forward Baggage (Avg F.S. 95)',n('bag1'),n('bag1')*ARM.bag1/1000],['Aft Baggage (Avg F.S. 123)',n('bag2'),n('bag2')*ARM.bag2/1000]];
+ const wbRows=rows.map(x=>`<tr><td>${x[0]}</td><td>${fmt(x[1],2)}</td><td>${fmt(x[2],3)}</td></tr>`).join('');
+ const cgbox=(p)=>`<div class="paper-cg"><b>C of G</b><span>${p.weight?fmt(p.cg,2)+' in':'—'}</span></div>`;
+ $('wbPaperPreview').innerHTML=`<div class="wb-exact-form">
+   <div class="wb-exact-title">SENECA COLLEGE</div>
+   <div class="wb-exact-subtitle">WEIGHT AND BALANCE WORK SHEET - C172S</div>
+   <div class="wb-exact-meta"><span>DATE: <b>${esc(date)}</b></span><span>PIC: <b>${esc(pic)}</b></span><span>AIRCRAFT: <b>${esc(a.reg)}</b></span></div>
+   <div class="wb-exact-body">
+     <table class="wb-exact-table"><thead><tr><th>ITEM</th><th>WEIGHT</th><th>MOMENT/1000</th></tr></thead><tbody>
+       <tr><td>Empty</td><td>${fmt(a.empty,2)}</td><td>${fmt(a.moment/1000,3)}</td></tr>
+       <tr><td>Front Seats (F.S. 34 - 46)</td><td>${fmt(n('picWeight')+n('frontPassenger'),2)}</td><td>${fmt((n('picWeight')+n('frontPassenger'))*ARM.front/1000,3)}</td></tr>
+       <tr><td>Aft Seats (F.S. 73)</td><td>${fmt(n('rear1')+n('rear2'),2)}</td><td>${fmt((n('rear1')+n('rear2'))*ARM.aft/1000,3)}</td></tr>
+       <tr><td>Forward Baggage (Avg F.S. 95)</td><td>${fmt(n('bag1'),2)}</td><td>${fmt(n('bag1')*ARM.bag1/1000,3)}</td></tr>
+       <tr><td>Aft Baggage (Avg F.S. 123)</td><td>${fmt(n('bag2'),2)}</td><td>${fmt(n('bag2')*ARM.bag2/1000,3)}</td></tr>
+       <tr class="wb-subtotal"><td><b>Sub Total -</b><br><i>Zero Fuel Condition</i></td><td>${fmt(z.weight,2)}</td><td>${fmt(z.moment/1000,3)}</td></tr>
+       <tr class="wb-separator"><td colspan="3"></td></tr>
+       <tr><td>Fuel Loading (US Gal)</td><td>${fmt(n('fuel')*6,2)}</td><td>${fmt(n('fuel')*6*48/1000,3)}</td></tr>
+       <tr class="wb-tall"><td><b>Sub Total -</b><br>Ramp Condition</td><td>${fmt(r.weight,2)}</td><td>${fmt(r.moment/1000,3)}</td></tr>
+       <tr class="wb-tall"><td>Subtract Fuel for Start, Taxi,<br>and Run Up</td><td>-8.40</td><td>${fmt(-8.4*48/1000,3)}</td></tr>
+       <tr class="wb-tall wb-subtotal"><td><b>Sub Total -</b><br><i>Take-Off Condition</i></td><td>${fmt(t.weight,2)}</td><td>${fmt(t.moment/1000,3)}</td></tr>
+       <tr class="wb-separator"><td colspan="3"></td></tr>
+       <tr><td>Subtract Fuel to Destination</td><td>${fmt(-n('fuelDest')*6,2)}</td><td>${fmt(-n('fuelDest')*6*48/1000,3)}</td></tr>
+       <tr class="wb-landing"><td><i>Landing Condition</i></td><td>${fmt(l.weight,2)}</td><td>${fmt(l.moment/1000,3)}</td></tr>
+     </tbody></table>
+     <div class="wb-cg-label cg1">C of G<div>${z.weight?fmt(z.cg,2)+' in':'—'}</div></div>
+     <div class="wb-cg-label cg2">C of G<div>${t.weight?fmt(t.cg,2)+' in':'—'}</div></div>
+     <div class="wb-cg-label cg3">C of G<div>${l.weight?fmt(l.cg,2)+' in':'—'}</div></div>
+   </div>
+   <div class="wb-exact-note">Fuel for start, taxi and take-off is normally 1.4 gallons or 8.4 lbs.</div>
+   <div class="wb-exact-limits"><div class="wb-limit-title">Aircraft Limitations</div><div><b>Max Ramp</b><span>2558 lbs</span></div><div><b>Max Takeoff</b><span>2550 lbs</span></div><div><b>Max Landing</b><span>2550 lbs</span></div></div>
+   <div class="wb-exact-footer">Form #301 2025-1</div>
+ </div>`;
+ const to=perfConditions('to'),ld=perfConditions('ld'),tw=t.weight,lw=l.weight;
+ const immediate=getPerfResult(false,'to',tw),destination=getPerfResult(false,'ld',lw);
+ const toRes=$('toResults')?.querySelectorAll('.perf-result')||[],ldRes=$('ldResults')?.querySelectorAll('.perf-result')||[];
+ const resultVal=(container,index)=>container[index]?.querySelector('b')?.textContent||'—';
+ const toGround=resultVal(toRes,1),toDist=resultVal(toRes,0);
+ const imGround=immediate?fmt(immediate.ground,0)+' ft':'—',imDist=immediate?fmt(immediate.total,0)+' ft':'—',imVref=immediate?fmt(immediate.vref,1)+' KIAS':'—';
+ const ldGround=resultVal(ldRes,1),ldDist=resultVal(ldRes,0),ldSpeed=destination?fmt(destination.vref,1)+' KIAS':'—';
+ const line=(label,value,cls='',bold=false)=>`<div class="perf-exact-field ${cls} ${bold?'bold':''}"><span class="label">${label}</span><span class="value">${esc(value)}</span></div>`;
+ const cleanRunway=id=>val(id);
+ const wind= id=>windDisplay(id);
+ $('perfPaperPreview').innerHTML=`<div class="perf-exact-form">
+   <div class="perf-exact-title">SENECA COLLEGE</div>
+   <div class="perf-exact-subtitle">AIRCRAFT PERFORMANCE CALCULATIONS - C172S</div>
+   <div class="perf-exact-rule"></div>
+   <section class="perf-exact-section departure">
+     <div class="perf-exact-band">DEPARTURE DATA</div>
+     <div class="perf-exact-departure-grid">
+       ${line('Take-Off Wt',tw?fmt(tw,1):'—','f-tw',true)}
+       ${line('Elevation',val('toElevation'),'f-elev')}${line('Active Runway',cleanRunway('toRunwayHeading'),'f-runway')}${line('Wind Velocity',wind('toWindVelocity'),'f-wind')}
+       ${line('Alt. Setting',val('toAltimeter'),'f-alt')}${line('TORA',val('toTORA'),'f-tora')}${line('HWC',to.hwc===null?'—':fmt(Math.floor(Math.max(0,to.hwc)),0),'f-hwc')}
+       ${line('Pressure Alt.',Number.isFinite(to.pa)?fmt(to.pa,0):'—','f-pa')}${line('TODA',val('toTODA'),'f-toda')}${line('XWC',to.xwc===null?'—':fmt(Math.ceil(to.xwc),0),'f-xwc')}
+       ${line('Temperature',val('toTemp'),'f-temp')}<div class="perf-exact-heading f-short">Short Field Take-off</div>
+       ${line('Density Alt.',Number.isFinite(to.da)?fmt(to.da,0):'—','f-da')}${line('Lift off',immediate&&immediate.speeds?immediate.speeds[0]+' KIAS':'—','f-liftoff')}${line("Speed at 50'",immediate&&immediate.speeds?immediate.speeds[1]+' KIAS':'—','f-speed50')}
+       <div class="perf-exact-heading f-todhead">Take-Off Distances</div>
+       ${line('Ground Run',toGround,'f-groundrun',true)}${line('Take Off Distance',toDist,'f-todist',true)}
+       <div class="perf-exact-heading f-immediate">Immediate Landing</div>
+       ${line('Ground Roll',imGround,'f-groundroll',true)}${line('Landing Distance',imDist,'f-landdist',true)}
+       ${line('VREF',imVref,'f-imvref')}
+     </div>
+   </section>
+   <section class="perf-exact-section destination">
+     <div class="perf-exact-band">DESTINATION DATA</div>
+     <div class="perf-exact-destination-grid">
+       ${line('Landing Wt',lw?fmt(lw,1):'—','f-lw',true)}
+       ${line('Elevation',val('ldElevation'),'f-elev')}${line('Active Runway',cleanRunway('ldRunwayHeading'),'f-runway')}${line('Wind Velocity',wind('ldWindVelocity'),'f-wind')}
+       ${line('Alt. Setting',val('ldAltimeter'),'f-alt')}${line('LDA',val('ldLDA'),'f-lda')}${line('HWC',ld.hwc===null?'—':fmt(Math.floor(Math.max(0,ld.hwc)),0),'f-hwc')}
+       ${line('Pressure Alt.',Number.isFinite(ld.pa)?fmt(ld.pa,0):'—','f-pa')}${line('XWC',ld.xwc===null?'—':fmt(Math.ceil(ld.xwc),0),'f-xwc')}
+       ${line('Temperature',val('ldTemp'),'f-temp')}${line('Density Alt.',Number.isFinite(ld.da)?fmt(ld.da,0):'—','f-da')}
+       <div class="perf-exact-heading f-ldhead">Landing Distances</div>
+       ${line('Ground Roll',ldGround,'f-groundroll',true)}${line('Landing Distance',ldDist,'f-landdist',true)}
+       ${line('VREF',ldSpeed,'f-vref')}
+       <div class="perf-exact-formula">1.3 V<sub>SO</sub> KCAS (max. gross wt.) × √(Landing Wt / Gross Wt.) = 1.3 V<sub>SO</sub> KCAS (landing weight)</div>
+       <div class="perf-exact-fuel">Minimum Fuel Required <span class="value">${esc(val('minFuel'))}</span></div>
+     </div>
+     <div class="perf-exact-footer">Form #301 2025-1</div>
+   </section>
+ </div>`;
+}
+function refreshAircraftSelectors(){
+ const current=$('aircraft')?.value||'GHFB';
+ if($('aircraft')){$('aircraft').innerHTML='';AIRCRAFT.forEach(a=>{const o=document.createElement('option');o.value=a.reg;o.textContent=a.reg;$('aircraft').appendChild(o)});$('aircraft').value=AIRCRAFT.some(a=>a.reg===current)?current:(AIRCRAFT[0]?.reg||'')}
+ if($('settingsAircraft')){$('settingsAircraft').innerHTML='';AIRCRAFT.forEach(a=>{const o=document.createElement('option');o.value=a.reg;o.textContent=a.reg;$('settingsAircraft').appendChild(o)})}
+}
+function populateSettings(){const a=AIRCRAFT.find(x=>x.reg===$('settingsAircraft').value)||AIRCRAFT[0];if(!a)return;$('settingsType').value=a.type;$('settingsAmend').value=a.amend;$('settingsEmpty').value=a.empty;$('settingsMoment').value=a.moment;$('settingsError').textContent='';renderSettingsList()}
+function renderSettingsList(){const el=$('settingsList');if(!el)return;el.innerHTML='<div class="settings-list-row"><strong>REG</strong><strong>TYPE</strong><strong>AMEND</strong><strong>EMPTY WT / MOMENT</strong></div>'+AIRCRAFT.map(a=>`<div class="settings-list-row"><strong>${a.reg}</strong><span>${displayAircraftType(a.type)}</span><span>Amend. ${a.amend}</span><span>${fmt(a.empty,2)} / ${fmt(a.moment,2)}</span></div>`).join('')}
+function openSettings(){refreshAircraftSelectors();$('settingsAircraft').value=$('aircraft').value||AIRCRAFT[0]?.reg||'';populateSettings();$('settingsOverlay').classList.add('show');$('settingsOverlay').setAttribute('aria-hidden','false')}
+function closeSettings(){$('settingsOverlay').classList.remove('show');$('settingsOverlay').setAttribute('aria-hidden','true')}
+function saveAircraftSettings(){const reg=$('settingsAircraft').value,a=AIRCRAFT.find(x=>x.reg===reg);const type=$('settingsType').value.trim(),amend=Number($('settingsAmend').value),empty=Number($('settingsEmpty').value),moment=Number($('settingsMoment').value);if(!a||!type||!Number.isFinite(amend)||!Number.isFinite(empty)||!Number.isFinite(moment)||empty<0||moment<0){$('settingsError').textContent='Please enter a valid aircraft type, amendment, empty weight, and moment.';return}a.type=type;a.amend=amend;a.empty=empty;a.moment=moment;persistAircraftData();refreshAircraftSelectors();$('aircraft').value=reg;calc();populateSettings();toast(`${reg} W&B data updated`)}
+function addAircraft(){const reg=$('newReg').value.trim().toUpperCase(),type=$('newType').value.trim(),amend=Number($('newAmend').value),empty=Number($('newEmpty').value),moment=Number($('newMoment').value);if(!reg||!type||AIRCRAFT.some(a=>a.reg===reg)||!Number.isFinite(amend)||!Number.isFinite(empty)||!Number.isFinite(moment)||empty<0||moment<0){$('settingsError').textContent='Enter a unique registration plus valid type, amendment, empty weight, and moment.';return}AIRCRAFT.push({reg,type,amend,empty,moment});persistAircraftData();refreshAircraftSelectors();$('aircraft').value=reg;calc();$('settingsAircraft').value=reg;populateSettings();['newReg','newType','newEmpty','newMoment'].forEach(id=>$(id).value='');$('newAmend').value='1';toast(`${reg} added`)}
+
+function saveDraft(){const ids=['aircraft','flightDate','picName','picWeight','frontPassenger','rear1','rear2','bag1','bag2','fuel','fuelDest','toElevation','toRunwayHeading','toWindVelocity','toAltimeter','toTORA','toTODA','toTemp','toSurface','ldElevation','ldRunwayHeading','ldWindVelocity','ldAltimeter','ldLDA','ldTemp','ldSurface','minFuel'];const d={};ids.forEach(id=>{const el=$(id);if(el)d[id]=el.value});localStorage.setItem('senecaFlightDraftV06',JSON.stringify(d))}
+function loadDraft(){try{const d=JSON.parse(localStorage.getItem('senecaFlightDraftV06'));if(!d)return;Object.entries(d).forEach(([k,v])=>{if($(k))$(k).value=v})}catch(e){}}
+function clearAll(){localStorage.removeItem('senecaBaronPerfV01');['picWeight','frontPassenger','rear1','rear2','picArm','frontPassengerArm','rear1Arm','rear2Arm','bag1','bag2','bag3','bag1Arm','bag2Arm','bag3Arm','fuel','fuelDest','flightDate','picName','toElevation','toRunwayHeading','toWindVelocity','toAltimeter','toTORA','toTODA','toTemp','ldElevation','ldRunwayHeading','ldWindVelocity','ldAltimeter','ldLDA','ldTemp','minFuel'].forEach(id=>{if($(id))$(id).value=''});['toTemp','ldTemp'].forEach(id=>{if($(id))$(id).value='15'});$('aircraft').value='GHFB';renderLoadingInputs();calc();toast('Flight cleared')}
+function toast(t){$('toast').textContent=t;$('toast').classList.add('show');clearTimeout(window.__toast);window.__toast=setTimeout(()=>$('toast').classList.remove('show'),1400)}
+function switchModule(which){const wb=which==='wb',perf=which==='perf',paper=which==='paper';$('wbModule').hidden=!wb;$('perfModule').hidden=!perf;$('paperworkModule').hidden=!paper;$('wbTab').classList.toggle('active',wb);$('perfTab').classList.toggle('active',perf);$('paperTab').classList.toggle('active',paper);$('wbTab').setAttribute('aria-selected',wb);$('perfTab').setAttribute('aria-selected',perf);$('paperTab').setAttribute('aria-selected',paper);$('title').textContent=wb?(isBaron()?'BE58 – Weight & Balance':'C172S – Weight & Balance'):perf?(isBaron()?'BE58 – Performance':'C172S – Takeoff & Landing Performance'):(isBaron()?'BE58 – Paperwork':'C172S – Paperwork');if(perf)renderPerformance();if(paper)renderPaperwork();}
+function openPaperwork(){switchModule('paper');renderPaperwork()}
+function closePaperwork(){switchModule('wb')}
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+}
+
+function init(){
+ loadAircraftData();refreshAircraftSelectors();$('aircraft').value=AIRCRAFT.some(a=>a.reg==='GHFB')?'GHFB':(AIRCRAFT[0]?.reg||'');loadDraft();
+ if(!$('aircraft').value&&AIRCRAFT.length)$('aircraft').value=AIRCRAFT[0].reg;
+ if(isBaron())loadBaronDraft();
+ if($('flightDate')&&!$('flightDate').value)$('flightDate').value=new Date().toISOString().slice(0,10);
+ renderLoadingInputs();calc();
+ $('wbModule').addEventListener('input',e=>{if(e.target.matches('input,select'))calc()});
+ $('aircraft').addEventListener('change',()=>{renderLoadingInputs();calc();renderPerformance()});
+ $('clearBtn').addEventListener('click',clearAll);$('resetBtn').addEventListener('click',clearAll);$('newBtn').addEventListener('click',clearAll);
+ $('saveBtn').addEventListener('click',()=>{isBaron()?saveDraftBaron():saveDraft();toast('Flight saved on this device')});
+ $('printBtn').addEventListener('click',openPaperwork);$('themeBtn').addEventListener('click',()=>{document.body.classList.toggle('light');toast('Appearance controls will be expanded later')});$('settingsBtn').addEventListener('click',openSettings);
+ $('paperworkPrint').addEventListener('click',()=>window.print());$('paperworkRefresh').addEventListener('click',()=>{renderPaperwork();toast('Paperwork refreshed')});
+ $('settingsClose').addEventListener('click',closeSettings);$('settingsCancel').addEventListener('click',closeSettings);$('settingsOverlay').addEventListener('click',e=>{if(e.target===$('settingsOverlay'))closeSettings()});$('settingsAircraft').addEventListener('change',populateSettings);$('settingsSave').addEventListener('click',saveAircraftSettings);$('addAircraftBtn').addEventListener('click',addAircraft);
+ $('zoomIn').addEventListener('click',()=>setZoom(chartZoom+0.5));$('zoomOut').addEventListener('click',()=>setZoom(chartZoom-0.5));$('zoomReset').addEventListener('click',()=>{chartFocusX=null;chartFocusY=null;setZoom(1)});$('zoomFocus').addEventListener('click',focusTakeoff);
+ ['toElevation','toRunwayHeading','toWindVelocity','toAltimeter','toTORA','toTODA','toTemp','toSurface','ldElevation','ldRunwayHeading','ldWindVelocity','ldAltimeter','ldLDA','ldTemp','ldSurface','minFuel'].forEach(id=>$(id).addEventListener('input',()=>performanceCalc(id.startsWith('to')?'takeoff':'landing')));
+ ['toSurface','ldSurface'].forEach(id=>$(id).addEventListener('change',()=>performanceCalc(id.startsWith('to')?'takeoff':'landing')));
+ $('wbTab').addEventListener('click',()=>switchModule('wb'));$('perfTab').addEventListener('click',()=>switchModule('perf'));$('paperTab').addEventListener('click',()=>switchModule('paper'));
+ switchModule('wb');
+}
+
+init();
+switchModule('wb');
+</script>
+</main>
+</body>
+</html>
+ 
